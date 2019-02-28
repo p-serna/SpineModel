@@ -233,3 +233,17 @@ def add_GABAsyns(model, spne=False, locs=[[0, 0.5]], gmax=0.5, tau1=0.1, tau2=4,
             NC = h.NetCon(h.nil, GABA, 0, 0, gmax)
             model.GABAlist.append(GABA)
             model.ncGABAlist.append(NC)
+
+def add_GABAsynscomp(model,comp, loc=0.5, gmax=0.5, tau1=0.1, tau2=4,
+                     rev=-70):
+    gmax = gmax/1000.   # Set in nS and convert to muS
+
+    GABA = h.Exp2Syn(float(loc), sec=comp) 
+    GABA.tau1 = tau1
+    GABA.tau2 = tau2
+    GABA.e = rev
+    stimI = h.NetStim(); stimI.number = 1
+    NC = h.NetCon(h.nil, GABA, 0, 0, gmax)
+    model.GABAlist.append(GABA)
+    model.ncGABAlist.append(NC)
+    #model.ncstimlist.append(NC)
