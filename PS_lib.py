@@ -176,9 +176,10 @@ def init_active(model, axon=False, soma=False, dend=True, dendNa=False,
             #s.insert('kv'); s.gbar_kv = model.gkv_dend
             #s.insert('km'); s.gbar_km = model.gkm_dend
             #s.insert('kca'); s.gbar_kca = 0*model.gkca_dend
-            #s.insert('ca'); s.gbar_ca = 0*model.gca_dend*dendCa
-            #s.insert('it'); s.gbar_it = model.git_dend*dendCa
+            s.insert('ca'); s.gbar_ca = 0.0
+            s.insert('it'); s.gbar_it = 0.0
             s.insert('itL'); s.gbar_itL = 5.631157727286365e-06
+            #s.insert('caL'); s.gbar_itL = 5.631157727286365e-06
             s.insert('cad'); 
 
             #s.insert('cad')

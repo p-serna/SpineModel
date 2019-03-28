@@ -10,4 +10,4 @@ if test "" = "yes" ; then
 else
 	NRNIV="${NRNBIN}nrniv"
 fi
-"${NRNIV}" -dll "/users/bssn/serna/HBP/DendriticSpine_N/mod/x86_64/.libs/libnrnmech.so" "$@"
+"${NRNIV}" -dll "/users/bssn/serna/HBP/SpineModel/mod/x86_64/.libs/libnrnmech.so" "$@"
