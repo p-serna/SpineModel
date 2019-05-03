@@ -34,6 +34,7 @@ NEURON {
         SUFFIX kir
         USEION k READ ek WRITE ik
         RANGE  gkbar, ik, mvhalf, mslope, mshift, qfact
+		POINTER mu
 }
  
 PARAMETER {
@@ -56,12 +57,14 @@ ASSIGNED {
         gk				(S/cm2)
         minf		
         ek				(mV)
+		
+		mu (1)
    }
  
 BREAKPOINT {
         SOLVE state METHOD cnexp
         gk = gkbar * m
-        ik = gk * ( v - ek )
+        ik = ((mu-1)*0.25+1)*gk * ( v - ek )
 }
   
 INITIAL {

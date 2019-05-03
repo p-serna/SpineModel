@@ -1,7 +1,6 @@
 TITLE LVA L-type (1.3) calcium channel for nucleus accumbens neuron w/ inact
 : see comments at end of file
 
-
 UNITS {
 	(mV) = (millivolt)
 	(mA) = (milliamp)
@@ -14,8 +13,8 @@ UNITS {
 
 NEURON {
 	SUFFIX caL13
-	USEION ca READ cai, cao WRITE ica VALENCE 2
-	RANGE pcaLbar, ica, mshift, hshift, qfact, hqfact
+	USEION cal READ cali, calo WRITE ical VALENCE 2
+	RANGE pcaLbar, ical, mshift, hshift, qfact, hqfact
 	POINTER mu
 }
 
@@ -44,12 +43,12 @@ PARAMETER {
 
 ASSIGNED { 
     v 		(mV)
-    ica 	(mA/cm2)
-    eca 	(mV)
+    ical 	(mA/cm2)
+    ecal 	(mV)
 
     celsius	(degC)
-    cai		(mM)
-    cao		(mM)
+    cali		(mM)
+    calo		(mM)
     
     minf
     mtau 	(ms)
@@ -66,7 +65,7 @@ STATE {
 
 BREAKPOINT {
     SOLVE states METHOD cnexp
-    ica  = ghk(v,cai,cao) * pcaLbar * m * m * h	  : Kasai 92, Brown 93
+    ical  = ghk(v,cali,calo) * pcaLbar * m * m * h	  : Kasai 92, Brown 93
 	mshift	= (1-mu)*10
 
 }
@@ -176,7 +175,5 @@ Calcium current can then be modeled as
 	ica = pcabar * mca * mca * ghk()
 
 Jason Moyer 2004 - jtmoyer@seas.upenn.edu
-
-Modified to use Ca ion - P. Serna (2019)
 ENDCOMMENT
 

@@ -38,7 +38,9 @@ def parameters(model):
 
 class loadNeuron(object):
     def __init__(self,hocfile="Basic.hoc",axon=False):
+        self.h = h
         h('xopen("'+hocfile+'")')
+        #h('xopen("mod/all_tau_vecs.hoc")')
         parameters(self)
         self._topol()
         if axon:
@@ -176,16 +178,35 @@ def init_active(model, axon=False, soma=False, dend=True, dendNa=False,
             #s.insert('kv'); s.gbar_kv = model.gkv_dend
             #s.insert('km'); s.gbar_km = model.gkm_dend
             #s.insert('kca'); s.gbar_kca = 0*model.gkca_dend
-            s.insert('ca'); s.gbar_ca = 0.0
-            s.insert('it'); s.gbar_it = 0.0
-            s.insert('itL'); s.gbar_itL = 5.631157727286365e-06
+            #s.insert('ca'); s.gbar_ca = 0.0
+            #s.insert('it'); s.gbar_it = 0.0
+            #s.insert('itL'); s.gbar_itL = 5.631157727286365e-06
             #s.insert('caL'); s.gbar_itL = 5.631157727286365e-06
+            s.insert('cal_ion')
+            # R - type
+            #s.insert('carPS'); s.pcarbar_carPS = 2.6e-5
+            # Q - type
+            s.insert('caqPS'); s.pcaqbar_caqPS = 6.0e-6      
+            # N - type
+            #s.insert('can'); s.pbar_can = 1.0e-5      
+            s.insert('canPS'); s.pbar_canPS = 1.0e-5      
+            
+            # (HVA) L - type
+            #s.insert('caL'); s.pbar_caL = 6.7e-6      
+            s.insert('caLPS'); s.pbar_caLPS = 6.7e-6     
+            
+            # (Cav1.3) L - type
+            #s.insert('caL13'); s.pcaLbar_caL13 = 1.7e-6
+            s.insert('caL13PS'); s.pbar_caL13PS = 1.7e-6     
             s.insert('cad'); 
 
+            #s.insert('caldyn'); 
+            
+            #s.cao = 2.0
             #s.insert('cad')
             #s.ena = model.Ena
             #s.ek = model.Ek
-            s.eca = model.Eca
+            #s.eca = model.Eca
 
 
 

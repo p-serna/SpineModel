@@ -13,8 +13,8 @@ UNITS {
 
 NEURON {
 	SUFFIX caL
-	USEION ca READ cai, cao WRITE ica VALENCE 2
-	RANGE pbar, ica, mshift, hshift:, mu
+	USEION cal READ cali, calo WRITE ical VALENCE 2
+	RANGE pbar, ical, mshift, hshift:, mu
 	POINTER mu
 }
 
@@ -43,12 +43,12 @@ PARAMETER {
 
 ASSIGNED { 
     v 		(mV)
-    ica 	(mA/cm2)
+    ical 	(mA/cm2)
     ecal		(mV)
 
     celsius	(degC)
-    cai		(mM)
-    cao		(mM)
+    cali		(mM)
+    calo		(mM)
     
     minf
     hinf
@@ -63,7 +63,7 @@ STATE {
 
 BREAKPOINT {
     SOLVE states METHOD cnexp
-    ica  = mu*ghk(v,cai,cao) * pbar * m * m * (a*h + (1-a))    : Kasai 92, Brown 93
+    ical  = mu*ghk(v,cali,calo) * pbar * m * m * (a*h + (1-a))    : Kasai 92, Brown 93
 }
 
 INITIAL {

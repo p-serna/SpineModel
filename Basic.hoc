@@ -1,6 +1,8 @@
 // Basic Neuron
 // 
-strdef neuron_name
+strdef neuron_name, preface, dirstr
+//xopen("./mod/all_tau_vecs.hoc")
+
 neuron_name = "Basic 4 Compartments"
 create dendA1
 dendA1 {
