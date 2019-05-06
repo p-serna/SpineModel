@@ -34,13 +34,16 @@ def parameters(model):
     model.git_dend = 0.00015 
     model.gh_dend = 0
     
+    model.NMDAlist = []
+    model.ncNMDAlist = []
+    model.GABAlist = []
+    model.ncGABAlist = []
+    model.stims = []
     
 
 class loadNeuron(object):
     def __init__(self,hocfile="Basic.hoc",axon=False):
-        self.h = h
         h('xopen("'+hocfile+'")')
-        #h('xopen("mod/all_tau_vecs.hoc")')
         parameters(self)
         self._topol()
         if axon:
@@ -178,14 +181,7 @@ def init_active(model, axon=False, soma=False, dend=True, dendNa=False,
             #s.insert('kv'); s.gbar_kv = model.gkv_dend
             #s.insert('km'); s.gbar_km = model.gkm_dend
             #s.insert('kca'); s.gbar_kca = 0*model.gkca_dend
-            #s.insert('ca'); s.gbar_ca = 0.0
-            #s.insert('it'); s.gbar_it = 0.0
-            #s.insert('itL'); s.gbar_itL = 5.631157727286365e-06
-            #s.insert('caL'); s.gbar_itL = 5.631157727286365e-06
             s.insert('cal_ion')
-            # R - type
-            #s.insert('carPS'); s.pcarbar_carPS = 2.6e-5
-            # Q - type
             s.insert('caqPS'); s.pcaqbar_caqPS = 6.0e-6      
             # N - type
             #s.insert('can'); s.pbar_can = 1.0e-5      
@@ -199,10 +195,7 @@ def init_active(model, axon=False, soma=False, dend=True, dendNa=False,
             #s.insert('caL13'); s.pcaLbar_caL13 = 1.7e-6
             s.insert('caL13PS'); s.pbar_caL13PS = 1.7e-6     
             s.insert('cad'); 
-
-            #s.insert('caldyn'); 
-            
-            #s.cao = 2.0
+            #s.ca = 0.0023
             #s.insert('cad')
             #s.ena = model.Ena
             #s.ek = model.Ek
@@ -218,8 +211,6 @@ def add_somaStim(model, p=0.5, onset=20, dur=1, amp=0):
     
 
 def add_NMDAsyns(model, locs=[[0, 0.5]], gmax=0.5, tau1=2, tau2=20):
-    model.NMDAlist = []
-    model.ncNMDAlist = []
     gmax = gmax/1000.   # Set in nS and convert to muS
     for loc in locs:
         NMDA = h.Exp2SynNMDA(float(loc[1]), sec=model.spne[int(loc[0])]) 
@@ -232,8 +223,6 @@ def add_NMDAsyns(model, locs=[[0, 0.5]], gmax=0.5, tau1=2, tau2=20):
 
 def add_GABAsyns(model, spne=False, locs=[[0, 0.5]], gmax=0.5, tau1=0.1, tau2=4,
                      rev=-70):
-    model.GABAlist = []
-    model.ncGABAlist = []
     gmax = gmax/1000.   # Set in nS and convert to muS
     if spne:
         for loc in locs:
@@ -242,9 +231,11 @@ def add_GABAsyns(model, spne=False, locs=[[0, 0.5]], gmax=0.5, tau1=0.1, tau2=4,
             GABA.tau2 = tau2
             GABA.e = rev
             stimI = h.NetStim(); stimI.number = 1
-            NC = h.NetCon(h.nil, GABA, 0, 0, gmax)
+            NC = h.NetCon(stimI, GABA, 0, 0, gmax)
             model.GABAlist.append(GABA)
             model.ncGABAlist.append(NC)
+            model.stims.append(stimI)
+            
             #model.ncstimlist.append(NC)
     else:
         for loc in locs:
@@ -255,6 +246,8 @@ def add_GABAsyns(model, spne=False, locs=[[0, 0.5]], gmax=0.5, tau1=0.1, tau2=4,
             NC = h.NetCon(h.nil, GABA, 0, 0, gmax)
             model.GABAlist.append(GABA)
             model.ncGABAlist.append(NC)
+    return(GABA,NC)
+    
 
 def add_GABAsynscomp(model,comp, loc=0.5, gmax=0.5, tau1=0.1, tau2=4,
                      rev=-70):
@@ -265,7 +258,9 @@ def add_GABAsynscomp(model,comp, loc=0.5, gmax=0.5, tau1=0.1, tau2=4,
     GABA.tau2 = tau2
     GABA.e = rev
     stimI = h.NetStim(); stimI.number = 1
-    NC = h.NetCon(h.nil, GABA, 0, 0, gmax)
+    NC = h.NetCon(stimI, GABA, 0, 0, gmax)    
     model.GABAlist.append(GABA)
     model.ncGABAlist.append(NC)
-    #model.ncstimlist.append(NC)
+    model.stims.append(stimI)
+    return(GABA,NC)
+    
