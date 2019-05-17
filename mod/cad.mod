@@ -58,7 +58,9 @@ UNITS {
 PARAMETER {
 	depth	= .1	(um)		: depth of shell
 	taur	= 20	(ms)		: rate of calcium removal
+    drive = 10000 (1)           : I do not know the meaning of this, in original code.
 	cainf	= 100e-6(mM)
+    pfree = 0.02  (1)              : rate of calcium that is not buffered straight away from current ica
 	cai		(mM)
 }
 
@@ -82,7 +84,7 @@ BREAKPOINT {
 
 DERIVATIVE state { 
 
-	drive_channel =  - (10000) * ica / (2 * FARADAY * depth)
+	drive_channel =  - drive * pfree * ica / (2 * FARADAY * depth)
 	if (drive_channel <= 0.) { drive_channel = 0. }	: cannot pump inward
 
 	ca' = drive_channel + (cainf-ca)/taur

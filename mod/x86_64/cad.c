@@ -97,8 +97,12 @@ extern Memb_func* memb_func;
  /* declare global and static user variables */
 #define cainf cainf_cad
  double cainf = 0.0001;
+#define drive drive_cad
+ double drive = 10000;
 #define depth depth_cad
  double depth = 0.1;
+#define pfree pfree_cad
+ double pfree = 0.02;
 #define taur taur_cad
  double taur = 20;
  /* some parameters have upper and lower limits */
@@ -108,7 +112,9 @@ extern Memb_func* memb_func;
  static HocParmUnits _hoc_parm_units[] = {
  "depth_cad", "um",
  "taur_cad", "ms",
+ "drive_cad", "1",
  "cainf_cad", "mM",
+ "pfree_cad", "1",
  "ca_cad", "mM",
  0,0
 };
@@ -118,7 +124,9 @@ extern Memb_func* memb_func;
  static DoubScal hoc_scdoub[] = {
  "depth_cad", &depth_cad,
  "taur_cad", &taur_cad,
+ "drive_cad", &drive_cad,
  "cainf_cad", &cainf_cad,
+ "pfree_cad", &pfree_cad,
  0,0
 };
  static DoubVec hoc_vdoub[] = {
@@ -224,7 +232,7 @@ static int _ode_spec1(_threadargsproto_);
  
 /*CVODE*/
  static int _ode_spec1 (double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt) {int _reset = 0; {
-   drive_channel = - ( 10000.0 ) * ica / ( 2.0 * FARADAY * depth ) ;
+   drive_channel = - drive * pfree * ica / ( 2.0 * FARADAY * depth ) ;
    if ( drive_channel <= 0. ) {
      drive_channel = 0. ;
      }
@@ -234,7 +242,7 @@ static int _ode_spec1(_threadargsproto_);
  return _reset;
 }
  static int _ode_matsol1 (double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt) {
- drive_channel = - ( 10000.0 ) * ica / ( 2.0 * FARADAY * depth ) ;
+ drive_channel = - drive * pfree * ica / ( 2.0 * FARADAY * depth ) ;
  if ( drive_channel <= 0. ) {
    drive_channel = 0. ;
    }
@@ -246,7 +254,7 @@ static int _ode_spec1(_threadargsproto_);
  
 static int state (double* _p, Datum* _ppvar, Datum* _thread, _NrnThread* _nt) {int _reset=0; int error = 0;
  {
-   drive_channel = - ( 10000.0 ) * ica / ( 2.0 * FARADAY * depth ) ;
+   drive_channel = - drive * pfree * ica / ( 2.0 * FARADAY * depth ) ;
    if ( drive_channel <= 0. ) {
      drive_channel = 0. ;
      }
