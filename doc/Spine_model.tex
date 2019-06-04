@@ -287,12 +287,25 @@ In general, this \textbf{electrotonic} hypothesis \textbf{(???)} works well and 
 {\bf Top-down approach.} The building block of the model will be a cylindrical compartment with passive membrane properties determined from validated electrophysiological models (check methods). Each type of compartment may include different densities of active conductances and synaptic inputs. \textbf{(already said 2 paragraphs above..?)} Dendritic branches and spines will all include voltage-dependent calcium currents (VDCC) and when required inhibitory synaptic inputs (methods). Dendritic spines will also include at least an excitatory synaptic input (methods), which comprises both AMPAR and NMDAR mediated currents. In section \ref{sec:active conductances}(?), we will consider the same model and simulated experiments when we consider the compartments with active conductances, both to generate action potentials (AP) and nonlinear membrane responses.
 
 
-
+\newpage
 \subsubsection*{Baseline model}
-Our ground zero for the model is sketched in panel a of Fig.\ref{fig: base model }. This comprise the compartments of the soma, at least two dendrites and the spines that we may include in the dendrite. For the parameters of the spines we use the data shown in previous section. Instead of using only the 375 spines we have characterized, we bootstrap the distribution to generate spines with the same parameters (and correlations). Bootstrapping the data permits to uncover intrinsic correlations and features that can pass unobserved by just looking at the data itself (methods). 
+
+The intrinsic heterogeneity in the features that characterize spines is a hallmark of biological system. Despite this, in the literature this has been circumvented when modelling spines, due to the level of complexity introduced. We examine the effects of this hetereogeinity in a multi-compartment model of the membrane of the neuron (ref: Rall, Segev, HH). The baseline (ground zero) model is sketched in panel a of Fig.\ref{fig: base model }. In its simplest form, it comprises a compartment representing the soma, at least two dendrites and the spines that we may include in one of the dendrites. The dendrite that harbours the spine under study is subdivided in at least three sequential pieces, where the central one is connected to the spine. For more details, check the methods.
+
+To include the different spine features we resample the data set, partially shown in previous section. Instead of using only those 375 spines we have analysed, we bootstrap the distribution -- generating spines with similar characteristics and correlations. Bootstrapping the data avoid missing intrinsic correlations in the data that can pass unobserved even with a careful analysis (methods). 
 %(For efficient computation) When simulating single spine (response) we avoid modeling the rest(/entirety) of the spines (spine ensemble) and instead we change the capacitance of the dendrite to compensate the increase in surface due to the (unmodeled) spines.
 
-We simulate a glutamate release in spines generated from bootstrap and estimate the membrane depolarization in different compartments (panel b of Fig.\ref{fig: base model }). In blue we show the depolarization in the membrane of the spine head, where the solid line represents the median of the distributions of EPSPs. The shaded regions represents the 66\% region interval. This can be compared with EPSPs registered in the soma,where the signal has been filtered by the dendrite, and thus has a slower kinetics, and the average amplitude of the EPSP is roughly 2 mV. We also plot, for comparison, the EPSP estimated 30 $\mu m$ from the spine (between the spine and the soma). (The behaviour with the distance will be analysed in the context of dendritic integration {\bf below}.) As expected, the amplitude of the depolarization in the spine head compared to the one in its dendritic shaft depends linearly with the resistance of the neck, as shown in panel c, where other geometrical parameters generate normal noise ({\bf ???Check??: also check main source of noise}). However, the amplitude of the EPSP depends primarily on the amplitude of the synaptic current, not only in the spine but also in dendritic shaft and the soma, see panel {\bf d}. That is to say, it depends chiefly on the size of the ePSD. Similarly, amplitude of intracellular Calcium concentration depends mostly on the NMDA component of the synapses ({\bf ?percentage coming from VDCC?}), and we assume this scale with area of the ePSD too. The component coming from VDCC is small (refs) and we fit the model to have a similar fraction in average $\sim 30\%$. A more thorough study of the effects on the variance of the signal is described in the appendix.
+
+\begin{figure}[b!]
+\includegraphics[width=1.0\linewidth]{Figure_Model_1}
+\caption{ Panel {\bf a} shows sketch of circuit model used for ..... each compartment includes passive membrane properties, active conductances such as Voltage dependent Calcium currents, etc. Inside the spine, the model includes an excitatory synapse with both AMPA and NMDA currents and the possibility of having second innervation with a GABAergic synapse. Inhibitory synapses can be located in the dendritic shaft or in the spine neck as well. Panel {\bf  b} shows the depolarization produced in the membrane of the spine head (blue) and in the dendritic shaft {\bf 30 $\mu$ m away!} (orange), when (only) glutamate release is simulated.  Panel {\bf c} shows the depolarization of the dendritic shaft and the soma in the same scenario. Panel {\bf d} shows the amplitude of the depolarization in the ensemble of spines as a function of the amplitude of the current. Panel {\bf e} shows the effects of the EPSP in the intracellular Calcium in the previous scenario (blue) and when NMDA currents is blocked (orange). \label{fig: base model }}
+\end{figure}
+
+We simulate a glutamate release in a spine and estimate the membrane depolarization in different compartments (panel b of Fig.\ref{fig: base model }). In blue we show the depolarization in the membrane of the spine head, where the solid line represents the median of the distributions of EPSPs. The shaded regions represents the 66\% region interval. This can be compared with EPSPs registered in the soma,where the signal has been filtered by the dendrite, and thus has a slower kinetics, and the average amplitude of the EPSP is roughly 2 mV. We also plot, for comparison, the EPSP estimated 30 $\mu m$ from the spine (between the spine and the soma). (The behaviour with the distance will be analysed in the context of dendritic integration {\bf below}.) The spread of the distribution is reflected in a large shaded area for EPSPs responses.
+
+The amplitude of the depolarization in the spine head compared to the one in its dendritic shaft depends linearly with the resistance of the neck, as shown in panel c, where other geometrical parameters generate ?normal? noise ({\bf ???Check??: also check main source of noise}). However, the amplitude of the EPSP is primarily driven by the synaptic current, in other words, the ePSD area (panel {\bf d}). This is obviously not only in the spine, but it  gets reflected in the other compartments too. 
+%That is to say, it depends chiefly on the size of the ePSD. 
+Similarly, the amplitude of intracellular Calcium concentration depends mostly on the NMDA component of the synapses ({\bf ?percentage coming from VDCC?}) -- we assume this scale with area of the ePSD too. The component coming from VDCC is small (refs) and we fit the model to have a similar fraction in average $\sim 30\%$. A more thorough study of the effects on the variance of the signal is described in the appendix.
 
 
 %{\bf Depolarization in spine.} 95\% of the variance in the signal of the depolarization in spine head comes from ????????.
@@ -302,36 +315,33 @@ We simulate a glutamate release in spines generated from bootstrap and estimate 
 %{\bf Depolarization in dendrite / soma.} This is an important quantity, since this is \textbf{what is actually measured usually in experiments}. Also, this is what will drive the neuron to generate an AP eventually. 95\% of the variance comes from ...
 
 
-
-\begin{figure}[htb!]
-\includegraphics[width=1.0\linewidth]{Figure_Model_1}
-\caption{ Panel {\bf a} shows sketch of circuit model used for ..... each compartment includes passive membrane properties, active conductances such as Voltage dependent Calcium currents, etc. Inside the spine, the model includes an excitatory synapse with both AMPA and NMDA currents and the possibility of having second innervation with a GABAergic synapse. Inhibitory synapses can be located in the dendritic shaft or in the spine neck as well. Panel {\bf  b} shows the depolarization produced in the membrane of the spine head (blue) and in the dendritic shaft {\bf 30 $\mu$ m away!} (orange), when (only) glutamate release is simulated.  Panel {\bf c} shows the depolarization of the dendritic shaft and the soma in the same scenario. Panel {\bf d} shows the amplitude of the depolarization in the ensemble of spines as a function of the amplitude of the current. Panel {\bf e} shows the effects of the EPSP in the intracellular Calcium in the previous scenario (blue) and when NMDA currents is blocked (orange). \label{fig: base model }}
-\end{figure}
-
-
-
 \subsubsection*{DiS - Inhibition in spines}
 
-Using the validated model shown before, we run the simulation for a bootstrapped set of DiS. In particular, we focus on the effects of the inhibitory synapse inside the spine head compared to those that are in the dendritic shaft. We assume the density of GABA$_{\rm A}$Rs in inhibitory synapses is independent of their location (any ref?), and their strength is then set by their area. 
+To asses the effects of DiS and their heterogeinity, we bootstrap the subset of DiS.
+%Using the validated model shown before, we run the simulation for a bootstrapped set of DiS. 
+In particular, we focus on the effects of axo-spinal inhibition compared to axo-dendritic inhibition. We assume the density of GABA$_{\rm A}$Rs in inhibitory synapses is independent of their location (any ref?), and their strength is then set by their area. Note that due to the difference in size between the two types of synapses the results will show a combination of effects due to the geometry of the compartments and the strength of the synapses. We analyse this separately in the appendix.
 %For this, we use the average of inhibitory currents received in the soma (REF) to calibrate the strength of a single receptor.
 
-Main effect of inhibition in the dendrite is to locally shunt the membrane when incoming EPSPs arrive (refs). Uncorrelated inhibition with excitation only have an average effect reducing EPSPs. However correlated inhibition may have a much stronger effect.
-
- We include inhibitory synaptic inputs in the model blocks corresponding to spines and dendritic shafts. Importance of Chloride reversal potential and resting potential. We will consider here the case of \textbf{hyperpolarizing and shunting} inhibitory currents.\textbf{ (???)} Panel a of Fig.\ref{fig:TimingInhibition} shows a sketch of the studied cases. 
-%\def\Cl{\text{Cl}}
-%\begin{equation}
-%E_{\Cl^-} = -\frac{RT}{F} \text{log}\frac{[\Cl^-]_o}{[\Cl^+]_i}
-%\end{equation}
-
-\begin{figure}[htb!]
+\begin{figure}[tb!]
 \includegraphics[width=1.0\linewidth]{f2}
-\caption{{\bf Timing of inhibition.} Panel a show a sketch of the protocol for the timing of inhibition. In case  I (black) a glutamate release is simulated at a (bs) DiS spine and after $\Delta t$, GABA release is simulated and inhibitory synapse is activated. In case II (violet) GABA is released first and after $-\Delta t$ time  glutamate is simulated. The effect on the depolarization in the spine head is shown in panel b1 when $\Delta t= 15$ ms. Note that inhibition effect is shunting the membrane, so when it arrives first its effect is not apparent until glutamate arrives. In panel b2, the effect on the intracellular Calcium is shown.
+\caption{{\bf Timing of inhibition.} 
+Panel a show a sketch of the protocol for the timing of inhibition. In case  I (black) a glutamate release is simulated at a (bs) DiS spine and after $\Delta t$, GABA release is simulated and inhibitory synapse is activated. In case II (violet) GABA is released first and after $-\Delta t$ time  glutamate is simulated. The effect on the depolarization in the spine head is shown in panel b1 when $\Delta t= 15$ ms. Note that inhibition effect is shunting the membrane, so when it arrives first its effect is not apparent until glutamate arrives. In panel b2, the effect on the intracellular Calcium is shown.
 In panel c1 and c3, we show the the amplitude of the depolarization and calcium concentration as a function of $\Delta t$ (negative values: GABA arrives first; positive values: glutamate arrives first), normalized to the case without inhibition. In panel c2, we show the decaying time of the depolarization as a function of $\Delta t$.
 %In right panel, we show its dependence on a correlated Poisson train, as a function of (THE VARIABLE critical for this).
 }\label{fig:TimingInhibition}
 \end{figure}
 
-The effect of a coincident inhibitory input with an excitatory one is well-known: shunting. (REFS) The overall effect can be estimated (and measured!) in the soma, however the model provides a way to see its effect in the spine head or in the dendritic branch with the implication this has. Panel b should show the effect of inhibition for the depolarization and or Calcium when inhibition is in the spine head (blue) or in the dendritic shaft close by. ({\bf Chirality to appendix}). We can also easily see the effects \textbf{(???)} of an early or late inhibitory input, both in the depolarization (panel c \& d). 
+One of the main effects of inhibition in the dendrite is to locally shunt the membrane when incoming EPSPs arrive (refs). 
+%We include inhibitory synaptic inputs in the model blocks corresponding to spines and dendritic shafts. 
+This depends on the chloride reversal potential and resting potential of the cell. Although it changes during development and other conditions, we will consider here both at -70 mV. If inihibition and excitation are uncorrelated, the former only have an average effect reducing EPSPs. However correlated inhibition may have a much stronger effect. To test this, we include a inhibitory contact in the compartment of the spine head, panel a in Fig.\ref{fig:TimingInhibition}. 
+%\def\Cl{\text{Cl}}
+%\begin{equation}
+%E_{\Cl^-} = -\frac{RT}{F} \text{log}\frac{[\Cl^-]_o}{[\Cl^+]_i}
+%\end{equation}
+
+
+%The overall effect can be estimated (and measured!) in the soma, however the model provides a way to see its effect in the spine head or in the dendritic branch with the implication this has. 
+In panels b1 and b2 we show the effect of inhibition in the intracellular Calcium in the spine head. It features the distribution of Calcium transients due to an EPSP without inhibition in black, and in green when inhibition arrives 5 ms after (panel b1) or 5 ms before the EPSP (panel b2). The activation of the excitatory event is marked in red  below the curves, while the inhibitory one is in green.
 
 We can extract the amplitudes of the shown transients in Fig.~\ref{fig:TimingInhibition}, normalise them (to soften the effects of heterogeinity in excitatory synapses) similarly to voltage or Calcium imaging {(???)}, and obtain their dependence with the delay in time. In panel e, we show this in the spine head both for voltage (blue) and Calcium (orange), and for DiS (dark colors) and SiS with an inhibitory synapse nearby (lighter colors). When inhibition comes first, the GABAergic current has the chance of shunting the depolarization peak. In contrast, when it comes \underline{last} (?) the effect on the amplitude disappears (except for a very small window of time). The asymmetry is manifest, but exhibits slower dynamics in Calcium compared to voltage. This is due to the slower dynamics of NMDAR-mediated currents, which account for most of  Calcium entry in spine heads. The effect of inhibition inside the spine is clearly \textbf{(???)} different in DiS (dark colors) as compared to SiS (lighter colors). 
 
