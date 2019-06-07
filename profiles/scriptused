@@ -1,1 +1,0 @@
-for i in $(ls *.dat); do echo mv \"$i\ copy.dat\" $i.dat ; done | awk '{if(NR%2==1) print $0}'
