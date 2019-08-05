@@ -58,9 +58,9 @@ UNITS {
 PARAMETER {
 	depth	= .1	(um)		: depth of shell
 	taur	= 20	(ms)		: rate of calcium removal
-    drive = 10000 (1)           : I do not know the meaning of this, in original code.
+    drive = 1000 (1)           : in original code.
 	cainf	= 100e-6(mM)
-    pfree = 0.02  (1)              : rate of calcium that is not buffered straight away from current ica
+    pfree = 0.05  (1)              : rate of calcium that is not buffered straight away from current ica
 	cai		(mM)
 }
 

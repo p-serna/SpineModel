@@ -6,8 +6,8 @@ def parameters(model):
     # Passive properties
     model.CM = 1.0
     model.RM = 7000.0
-    model.RA = 250.0 
-    model.E_PAS = -65
+    model.RA = 150.0 
+    model.E_PAS = -70
     model.temperature = 37
 
     # Active properties
@@ -39,6 +39,7 @@ def parameters(model):
     model.GABAlist = []
     model.ncGABAlist = []
     model.stims = []
+    model.dt = 0.05
     
 
 class loadNeuron(object):
@@ -54,8 +55,10 @@ class loadNeuron(object):
     def _topol(self):            
         self.soma = h.soma
         self.dend = []
+        self.comp = {}
         for sec in h.allsec():
             self.dend.append(sec)
+            self.comp[sec.hname()] = sec
         # Dropping Soma 
         self.dend.pop() 
         self.spne, self.neck = [], []
@@ -66,6 +69,7 @@ class loadNeuron(object):
         self.axon.L = 300
         self.axon.diam = 1
         self.axon.connect(self.soma,1,0)
+        self.comp['axon'] = self.axon 
     
     def _biophys(self):
         for sec in h.allsec():
@@ -100,6 +104,7 @@ class loadNeuron(object):
         newdend.diam = D
         
         self.dend.append(newdend)
+        self.comp[name] = newdend 
 
     def addSpne(self,name=None,locus=-1,ilocus=0.5,L=1.0,D=1.0,Lneck=1.2,Dneck=0.1):
         if name is None:
@@ -138,6 +143,10 @@ class loadNeuron(object):
                         
         self.spne.append(newspne)
         self.neck.append(newneck)
+        self.comp[name] = newspne 
+        self.comp[name+'_neck'] = newneck 
+
+
 
 
 

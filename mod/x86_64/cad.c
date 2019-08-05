@@ -98,11 +98,11 @@ extern Memb_func* memb_func;
 #define cainf cainf_cad
  double cainf = 0.0001;
 #define drive drive_cad
- double drive = 10000;
+ double drive = 1000;
 #define depth depth_cad
  double depth = 0.1;
 #define pfree pfree_cad
- double pfree = 0.02;
+ double pfree = 0.05;
 #define taur taur_cad
  double taur = 20;
  /* some parameters have upper and lower limits */

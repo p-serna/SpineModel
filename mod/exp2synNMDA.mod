@@ -101,7 +101,9 @@ FUNCTION mgblock(v(mV)) {
 
 	: from .....
 
-	mgblock = 1 / (1 + exp( -(v+10.0(/mV)) * (mg / 16.13 (mM))))
+	:mgblock = 1 / (1 + exp( -((v+8.0 (mV) )/12.0 (mV) )) * (mg / 3.57 (mM)))
+    mgblock = 1 / (1 + exp( -(v/15.65 (mV) )) * (mg / 3.57 (mM)))
+
 }
 
 NET_RECEIVE(weight (uS)) {
