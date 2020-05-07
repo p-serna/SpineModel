@@ -1,0 +1,21 @@
+
+
+
+
+
+
+#cd HBP/SpineModel
+#neuron
+
+
+
+cond='1000_70_65'
+pars='1.0 -70.0 0.65'
+python Spine_Model_v32_diameters.py $pars $cond 1.0
+
+
+cond='1000_80_65'
+pars='1.0 -80.0 0.65'
+python Spine_Model_v32_diameters.py $pars $cond 1.0
+
+

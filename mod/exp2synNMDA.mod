@@ -52,7 +52,7 @@ PARAMETER {
 	tau1=.1 (ms) <1e-9,1e9>
 	tau2 = 10 (ms) <1e-9,1e9>
 	e=0	(mV)
-	mg=1    (mM)		: external magnesium concentration
+	mg= 1   (mM)		: external magnesium concentration
     pf = 0.05  (1)      : adjusted to give 15% ica at -60 mV
 }
 
@@ -99,10 +99,13 @@ FUNCTION mgblock(v(mV)) {
 	DEPEND mg
 	FROM -140 TO 80 WITH 1000
 
-	: from .....
+	: mgblock = 1 / (1 + exp( -((v+8.0 (mV) )/12.0 (mV) )) * (mg / 3.57 (mM)))
 
-	:mgblock = 1 / (1 + exp( -((v+8.0 (mV) )/12.0 (mV) )) * (mg / 3.57 (mM)))
-    mgblock = 1 / (1 + exp( -(v/15.65 (mV) )) * (mg / 3.57 (mM)))
+
+	: from Jahr and Stevens 1990
+
+    :mgblock = 1 / (1 + exp( -(v/15.65 (mV) )) * (mg / 3.57 (mM)))
+    mgblock = 1 / (1 + exp( -(v/16.13 (mV) )) * (mg / 3.57 (mM)))
 
 }
 

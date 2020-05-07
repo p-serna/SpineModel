@@ -231,7 +231,7 @@ def add_NMDAsyns(model, locs=[[0, 0.5]], gmax=0.5, tau1=2, tau2=20):
         model.ncNMDAlist.append(NC)   
 
 def add_GABAsyns(model, spne=False, locs=[[0, 0.5]], gmax=0.5, tau1=0.1, tau2=4,
-                     rev=-70):
+                     rev=-80):
     gmax = gmax/1000.   # Set in nS and convert to muS
     if spne:
         for loc in locs:

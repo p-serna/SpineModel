@@ -3,7 +3,7 @@ from numpy.random import randn,randint
 from matplotlib.pylab import subplots
 import pickle
 
-datasetfile = "data_Fullset/Fullset_shrnk.pkl"
+datasetfile = "data_Fullset/Fullset.pkl"
 with open(datasetfile,"rb") as f:
     data = pickle.load(f)
 

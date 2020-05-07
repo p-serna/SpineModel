@@ -358,7 +358,7 @@ _check_mgblock(_p, _ppvar, _thread, _nt);
  
 double _f_mgblock ( _threadargsprotocomma_ double _lv ) {
    double _lmgblock;
- _lmgblock = 1.0 / ( 1.0 + exp ( - ( _lv / 15.65 ) ) * ( mg / 3.57 ) ) ;
+ _lmgblock = 1.0 / ( 1.0 + exp ( - ( _lv / 16.13 ) ) * ( mg / 3.57 ) ) ;
    
 return _lmgblock;
  }
