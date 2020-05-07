@@ -1,0 +1,15 @@
+gtrG = 0.01801
+gtrN = 0.005128728
+gtrA = 0.006667346938775509
+AMPAtaus = (0.1,1.8)
+GABAtaus = (0.5,15.0)
+NMDAtaus = (0.5,17.0)
+dendDiam = 0.87
+rm = 12e3
+ra = 250
+factor2nddend = 25
+len2nddend = 70
+inhOutside = True
+factorspinesdend = 3.7
+dendsizeL0 = 10
+denddiam0 = 1.24
