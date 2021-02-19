@@ -1,0 +1,44 @@
+// Ball and 2 sticks neuron
+// 
+strdef neuron_name
+neuron_name = "Basic 4 Compartments"
+create dendA1prox
+dendA1prox {
+  pt3dclear()
+  pt3dadd(0.0,0.0,13.2372,1.5)
+  pt3dadd(0.0,0.0,14.2372,1.5)
+}
+create dendA1
+dendA1 {
+  pt3dclear()
+  pt3dadd(0.0,0.0,14.2372,1.5)
+  pt3dadd(0.0,10.0,214.2372,1.5)
+}
+create dendB1
+dendB1 {
+  pt3dclear()
+  pt3dadd(0.0,0.0,0.0,2.0)
+  pt3dadd(50.0,0.0,-4.0,1.0)
+}
+create soma
+access soma
+pt3dclear()
+pt3dadd(0,0,0,29.7838)
+pt3dadd(0,0,13.2372,29.7838)
+// Soma as sphere: radius = 9.92793
+access soma
+connect dendA1prox(0),1
+connect dendB1(0),1
+access dendA1prox
+connect dendA1(0),1
+define_shape()
+
+// Para que es esto?
+has_ais = 0
+
+proc define_lengths() {
+  soma                   { L = 13.2372 diam = 29.7838    }
+  dendA1prox                { L = 1.0 diam = 1.5}
+  dendA1                 { L = 200.0 diam = 1.5        }
+  dendB1                 { L = 50.0 diam = 1.5      }
+}

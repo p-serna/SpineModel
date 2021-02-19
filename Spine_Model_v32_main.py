@@ -13,6 +13,9 @@ import os
 import sys
 import pandas as pd
 
+folderstore = './fconditions/'
+
+
 # changing parameters
 try:
     assert len(sys.argv)==5, 'No correct number of arguments'
@@ -45,7 +48,6 @@ GABAErev = float(sys.argv[2])
 condition = sys.argv[4]
     
 print('Hey!')
-folderstore = '/mnt/data/spinemodel/fconditions/'
 
 # Parameter definitions
 # Data is stored here      
