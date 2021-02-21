@@ -108,3 +108,6 @@ Response/
 
 # Figures
 fconditions/
+
+#mod compilation
+mod/x86_64
