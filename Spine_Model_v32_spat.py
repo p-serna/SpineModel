@@ -15,7 +15,7 @@ import sys
 from tools import *
 from scipy.signal import find_peaks
 
-NSTAT = 20
+NSTAT = 3
 
 # changing parameters
 try:

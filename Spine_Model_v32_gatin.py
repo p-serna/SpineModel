@@ -14,7 +14,7 @@ from scipy.signal import find_peaks
 import os
 import sys
 
-NSTAT = 100
+NSTAT = 5
 
 # changing parameters
 try:

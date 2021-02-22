@@ -749,7 +749,7 @@ def getint(x):
    sh = xc.shape[0]
    xmed = xc[sh//2]
    s0= int(sh*(1-.6827)/2)
-   s1 = sh-s0
+   s1 = sh-1-s0
    x0 = xc[s0]
    x1 = xc[s1]
    s0b= int(sh*(1-.95)/2)

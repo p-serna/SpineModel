@@ -316,7 +316,7 @@ im = Image.open(spinemodel_sketch)
 height = im.size[1]
 
 for ifigure in range(4):
-    im = np.array(im).astype(np.float) / 255
+    im = np.array(im).astype(float) / 255
     fig = figure(figsize=(15,11.5*1.20))
     gs = mpl.gridspec.GridSpec(3, 4,  wspace=0.35, hspace=.35) # 2x3 grid
 
@@ -578,18 +578,18 @@ for ifigure in range(4):
     pos[1:,0] = -0.08
     pos[-1,:] = (-.052,1.1)
     numbering_panels(axs,pos,labels=['A1','B','C','D','E','F','G','A2'])
-    fig.savefig(folderoutput+'f1v31splitting_b.png',dpi = 300,tight_layout = True)
-    #fig.savefig(folderoutput+'f1v31splitting_b.pdf',dpi = 300,tight_layout = True)
+    fig.savefig(folderoutput+'f1v31splitting_b.png',dpi = 300)
+    #fig.savefig(folderoutput+'f1v31splitting_b.pdf',dpi = 300)
 
-    #avefig("Figure_Model_1bx2.pdf",dpi = 300, tight_layout = True)
+    #avefig("Figure_Model_1bx2.pdf",dpi = 300)
     print('Finished first figure splitted!')
 
 
 
-    #savefig('f2x2.pdf',dpi = 300,tight_layout = True)
+    #savefig('f2x2.pdf',dpi = 300)
     im = Image.open(spinemodel_sketch)
     height = im.size[1]
-    im = np.array(im).astype(np.float) / 255
+    im = np.array(im).astype(float) / 255
     fig = figure(figsize=(15,11.5))
     gs = mpl.gridspec.GridSpec(3, 4,  wspace=0.35, hspace=.35) # 2x3 grid
 
@@ -650,7 +650,7 @@ for ifigure in range(4):
         for xp,yp in zip(xps,yps):
             xtt = linspace(0,xp)
             ax2.plot(xtt,xtt*0+yp,'k:')
-            print(xp,yp)
+            #print(xp,yp)
             
         ax2.vlines(xps[0],0,yps[0],linestyle=':')
 
@@ -886,10 +886,10 @@ for ifigure in range(4):
     pos[1:,0] = -0.08
     pos[-1,:] = (-.052,1.1)
     numbering_panels(axs,pos,labels=['A1','B','C','D','E','F','G','A2'])
-    fig.savefig(folderoutput+'f1_SA'+str(ifigure)+'.png',dpi = 300,tight_layout = True)
-#fig.savefig(folderoutput+'f1v31splitting_b.pdf',dpi = 300,tight_layout = True)
+    fig.savefig(folderoutput+'f1_SA'+str(ifigure)+'.png',dpi = 300)
+#fig.savefig(folderoutput+'f1v31splitting_b.pdf',dpi = 300)
 
-#avefig("Figure_Model_1bx2.pdf",dpi = 300, tight_layout = True)
+#avefig("Figure_Model_1bx2.pdf",dpi = 300)
 print('Finished first figure splitted!')
 
 
@@ -1144,10 +1144,10 @@ with open(folderstore+"inhibition_v3_outPSD_"+condition+"_btstrp"+shflag+".pickl
 
 sketch_inh = './spine-inh_sketch_bothm.png'
 #height = im.size[1]
-#im = np.array(im).astype(np.float) / 255
+#im = np.array(im).astype(float) / 255
 im = Image.open(sketch_inh)
 height = im.size[1]
-im = np.array(im).astype(np.float) / 255
+im = np.array(im).astype(float) / 255
 
 fig = figure(figsize=(15,7.))
 gs = mpl.gridspec.GridSpec(6,8,wspace=3, hspace=3) # 2x3 grid
@@ -1527,16 +1527,16 @@ pos[-1,1] = 1.3
 numbering_panels(axs,pos,labels=['A1','B1','C','D','E','F','A2','B2'])
 
 
-fig.savefig(folderoutput+'f2v3_b.png',dpi = 300,tight_layout = True)
-#fig.savefig(folderoutput+'f2v3_b.pdf',dpi = 300,tight_layout = True)
+fig.savefig(folderoutput+'f2v3_b.png',dpi = 300)
+#fig.savefig(folderoutput+'f2v3_b.pdf',dpi = 300)
 
 print('Finished 2nd figure 1st version!')
 
 #height = im.size[1]
-#im = np.array(im).astype(np.float) / 255
+#im = np.array(im).astype(float) / 255
 im = Image.open(sketch_inh)
 height = im.size[1]
-im = np.array(im).astype(np.float) / 255
+im = np.array(im).astype(float) / 255
 
 fig = figure(figsize=(15,7.))
 gs = mpl.gridspec.GridSpec(6,8,wspace=3, hspace=3) # 2x3 grid
@@ -1918,8 +1918,8 @@ pos[-1,1] = 1.3
 numbering_panels(axs,pos,labels=['A1','B1','C','D','E','F','A2','B2'])
 
 
-fig.savefig(folderoutput+'f2v3_b2.png',dpi = 300,tight_layout = True)
-#fig.savefig(folderoutput+'f2v3_b2.pdf',dpi = 300,tight_layout = True)
+fig.savefig(folderoutput+'f2v3_b2.png',dpi = 300)
+#fig.savefig(folderoutput+'f2v3_b2.pdf',dpi = 300)
 
 print('Finished 2nd figure 2nd version!')
 
@@ -1927,10 +1927,10 @@ with open(folderstore+"inhibition_v3_outPSD_allspn_"+condition+"_btstrp"+shflag+
     tdels_b,inhtimSis_b,_,tauSis_b,tauSis2_b,inhtimSism_b = pickle.load(f)
 
 #height = im.size[1]
-#im = np.array(im).astype(np.float) / 255
+#im = np.array(im).astype(float) / 255
 im = Image.open(sketch_inh)
 height = im.size[1]
-im = np.array(im).astype(np.float) / 255
+im = np.array(im).astype(float) / 255
 
 fig = figure(figsize=(15,7.))
 gs = mpl.gridspec.GridSpec(6,8,wspace=3, hspace=3) # 2x3 grid
@@ -2312,8 +2312,8 @@ pos[-1,1] = 1.3
 numbering_panels(axs,pos,labels=['A1','B1','C','D','E','F','A2','B2'])
 
 
-fig.savefig(folderoutput+'f2v3_b3_disvssps.png',dpi = 300,tight_layout = True)
-#fig.savefig(folderoutput+'f2v3_b2.pdf',dpi = 300,tight_layout = True)
+fig.savefig(folderoutput+'f2v3_b3_disvssps.png',dpi = 300)
+#fig.savefig(folderoutput+'f2v3_b2.pdf',dpi = 300)
 
 print('Finished 2nd figure 3rd version!')
 
@@ -2322,10 +2322,10 @@ with open(folderstore+"inhibition_v3_outPSD_allspn_"+condition+"_btstrp"+shflag+
     tdels_b,inhtimSis_b,_,tauSis_b,tauSis2_b,inhtimSism_b = pickle.load(f)
 
 #height = im.size[1]
-#im = np.array(im).astype(np.float) / 255
+#im = np.array(im).astype(float) / 255
 im = Image.open(sketch_inh)
 height = im.size[1]
-im = np.array(im).astype(np.float) / 255
+im = np.array(im).astype(float) / 255
 
 fig = figure(figsize=(15,7.))
 gs = mpl.gridspec.GridSpec(6,8,wspace=3, hspace=3) # 2x3 grid
@@ -2707,8 +2707,8 @@ pos[-1,1] = 1.3
 numbering_panels(axs,pos,labels=['A1','B1','C','D','E','F','A2','B2'])
 
 
-fig.savefig(folderoutput+'f2v3_b_disvssps.png',dpi = 300,tight_layout = True)
-#fig.savefig(folderoutput+'f2v3_b2.pdf',dpi = 300,tight_layout = True)
+fig.savefig(folderoutput+'f2v3_b_disvssps.png',dpi = 300)
+#fig.savefig(folderoutput+'f2v3_b2.pdf',dpi = 300)
 
 print('Finished 2nd figure 3rd version!')
 
@@ -2844,7 +2844,7 @@ ax1.tick_params(which='major',direction='in')
 
 
 #fig.savefig(folderoutput+'f3v3_A.pdf',dpi = 300,tight_layout = True)
-fig.savefig(folderoutput+'f3v3_A.png',dpi = 300,tight_layout = True)
+fig.savefig(folderoutput+'f3v3_A.png',dpi = 300)
 
 print('Finished 3rd figure 1st part!')
 
@@ -2981,7 +2981,7 @@ ax1.tick_params(which='major',direction='in')
 
 
 #fig.savefig(folderoutput+'f3v3_A.pdf',dpi = 300,tight_layout = True)
-fig.savefig(folderoutput+'f3v3_A_DISDIS.png',dpi = 300,tight_layout = True)
+fig.savefig(folderoutput+'f3v3_A_DISDIS.png',dpi = 300)
 
 print('Finished 3rd figure 1st part!')
 
@@ -3108,6 +3108,6 @@ ax1.vlines(0.0,0.,0.4,linestyle='--')
 
 
 #savefig(folderoutput+'f3v3_B.pdf',dpi = 300,tight_layout = True)
-savefig(folderoutput+'f3v3_B.png',dpi = 300,tight_layout = True)
+savefig(folderoutput+'f3v3_B.png',dpi = 300)
 
 print('Finished 3rd figure 2nd part!')
