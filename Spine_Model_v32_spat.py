@@ -15,6 +15,8 @@ import sys
 from tools import *
 from scipy.signal import find_peaks
 
+NSTAT = 20
+
 # changing parameters
 try:
     assert len(sys.argv)==5, 'No correct number of arguments'
@@ -710,7 +712,7 @@ simulate_inhout   = lambda dss, path: simulateSet2spvsl(model,dis,sps,distance =
                       inh = 'out',silent = 'sp0', iPSDsh = iPSDsh, path = path)
 
 print('We start')
-for i in range(20):
+for i in range(NSTAT):
     dss = 0.0
     
     _,_,vtracs0,vtracsD0,vtracsS0,Ctracs0,_,_,_,vtracs2,Ctracs2 = simulate_inhinDiS(dss,'on')

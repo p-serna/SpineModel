@@ -14,6 +14,8 @@ from scipy.signal import find_peaks
 import os
 import sys
 
+NSTAT = 100
+
 # changing parameters
 try:
     assert len(sys.argv)==5, 'No correct number of arguments'
@@ -654,7 +656,7 @@ dendA2.L = 8 -dendsh.L
 
 print('We start')
 
-for i in range(100):
+for i in range(NSTAT):
     res = simulateSet(model,dis,dis,tG = 13,ton = 50,dton2 = 15,toffset = 100,
                     t_stop = 500, EL = -70,btsr = ones(9)==1,VDCC = VDCCa, 
                     inh = 'in',silent = 'sp0', iPSDsh = iPSDsh)
@@ -759,7 +761,7 @@ dendA2.L = 8 -dendsh.L
 
 print('We start')
 
-for i in range(100):
+for i in range(NSTAT):
     res = simulateSet(model,dis,sps,tG = 13,ton = 50,dton2 = 15,toffset = 100,
                     t_stop = 500, EL = -70,btsr = ones(9)==1,VDCC = VDCCa, 
                     inh = 'in',silent = 'sp0', iPSDsh = iPSDsh)
