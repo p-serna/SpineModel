@@ -4,13 +4,13 @@ from matplotlib.pylab import *
 plotose = False
 import pickle
 
-import PS_lib as lb
-import PS_storage as st
-import PS_tools as tools
+import lib as lb
+import storage as st
+import tools as tools
 
 import os
 import sys
-from PS_tools import *
+from tools import *
 import pandas as pd
 
 
@@ -49,7 +49,7 @@ GABAErev = float(sys.argv[2])
 condition = sys.argv[4]
     
 print('Hey!')
-folderstore = '/mnt/data/spinemodel/fconditions/'
+folderstore = './fconditions/'
 
 # Parameter definitions
 # Data is stored here      
@@ -438,11 +438,11 @@ def simulateSet(model,spn,tG = 500,ton = 50,
         
         freespinearea = (spineArea-data[i,0])/spineArea
         
-        sp.pbar_caL13PS =freespinearea* VDCC[0]*CaTcond#/spineArea
-        sp.pbar_caLPS = freespinearea*VDCC[1]*CaTcond#/spineArea
-        sp.pbar_canPS = freespinearea*VDCC[2]*CaTcond#/spineArea
-        sp.pcaqbar_caqPS = freespinearea*VDCC[3]*CaTcond#/spineArea
-        #sp.pcarbar_carPS = VDCC[4]*CaTcond
+        sp.pbar_caL13_alt =freespinearea* VDCC[0]*CaTcond#/spineArea
+        sp.pbar_caL_alt = freespinearea*VDCC[1]*CaTcond#/spineArea
+        sp.pbar_can_alt = freespinearea*VDCC[2]*CaTcond#/spineArea
+        sp.pcaqbar_caq_alt = freespinearea*VDCC[3]*CaTcond#/spineArea
+        #sp.pcarbar_car_alt = VDCC[4]*CaTcond
         
         
         NC.delay = toffset+ton-50

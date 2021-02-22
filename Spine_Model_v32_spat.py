@@ -5,14 +5,14 @@ from matplotlib.pylab import *
 plotose = False
 import pickle
 
-import PS_lib as lb
-import PS_storage as st
-import PS_tools as tools
+import lib as lb
+import storage as st
+import tools as tools
 
 import os
 import sys
 
-from PS_tools import *
+from tools import *
 from scipy.signal import find_peaks
 
 # changing parameters
@@ -45,7 +45,7 @@ GABAErev = float(sys.argv[2])
 
 condition = sys.argv[4]
 
-folderstore = '/mnt/data/spinemodel/fconditions/spatial/'
+folderstore = './fconditions/spatial/'
 
 
 # Parameter definitions
@@ -500,19 +500,19 @@ def simulateSet2spvsl(model,spn,spn2,distance = 10,tG = 500,
         sp0.cm = data[i,8]
         
         CaTcond = 1e-4# THis is a factor to transform pS/um^2 to S/cm^2 units of neuron
-        sp0.pbar_caL13PS = VDCC[0]*CaTcond#/spineArea
-        sp0.pbar_caLPS = VDCC[1]*CaTcond#/spineArea
-        sp0.pbar_canPS = VDCC[2]*CaTcond#/spineArea
-        sp0.pcaqbar_caqPS = VDCC[3]*CaTcond#/spineArea
+        sp0.pbar_caL13_alt = VDCC[0]*CaTcond#/spineArea
+        sp0.pbar_caL_alt = VDCC[1]*CaTcond#/spineArea
+        sp0.pbar_can_alt = VDCC[2]*CaTcond#/spineArea
+        sp0.pcaqbar_caq_alt = VDCC[3]*CaTcond#/spineArea
         
         
         sp1.L = data2[i,2]
         sp1.diam = data2[i,3]
         sp1.cm = data2[i,5]
-        sp1.pbar_caL13PS = VDCC[0]*CaTcond#/spineArea
-        sp1.pbar_caLPS = VDCC[1]*CaTcond#/spineArea
-        sp1.pbar_canPS = VDCC[2]*CaTcond#/spineArea
-        sp1.pcaqbar_caqPS = VDCC[3]*CaTcond#/spineArea
+        sp1.pbar_caL13_alt = VDCC[0]*CaTcond#/spineArea
+        sp1.pbar_caL_alt = VDCC[1]*CaTcond#/spineArea
+        sp1.pbar_can_alt = VDCC[2]*CaTcond#/spineArea
+        sp1.pcaqbar_caq_alt = VDCC[3]*CaTcond#/spineArea
         
         
         NC0.delay = toffset+ton-50

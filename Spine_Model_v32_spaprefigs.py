@@ -34,7 +34,7 @@ except:
 condition = sys.argv[1]
 #condition = '1000_80_65'
 
-folderstore = '/mnt/data/spinemodel/fconditions/spatial/'
+folderstore = './fconditions/spatial/'
 
     
 
