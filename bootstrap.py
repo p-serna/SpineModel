@@ -7,14 +7,31 @@ datasetfile = "data_Fullset/Fullset_shrnk_corrected.pkl"
 with open(datasetfile,"rb") as f:
     data = pickle.load(f)
 
+keys = list(data.keys())
+original_set = ['#Sp', '#Bch', 'Dsb', 'Dss', 'd_interSp', 'Vtot', 'Vh', 'Ln', 'SA',
+       'nPSD', 'A1', 'A2', 'GPHN_SNR', 'DiS-EMchk', 'Lneck', 'maxDneck',
+       'minDneck', 'meanDneck', 'Rneck', 'Lhead', 'maxDhead', 'minDhead',
+       'meanDhead', 'Ah', 'Rhead', 'meanDneck_trunc70pc']
+
+if set(keys) != set(original_set):
+    actual_keys = [k for k in original_set if k in keys]
+    missng_keys = [k for k in original_set if k not in keys]
+    remove_keys = [k for k in keys if k not in original_set]
+    print(f"WARNING! The keys of the data pickle do not match completely, it contains {len(actual_keys)} of {len(original_set)} original keys, missing:",missng_keys, "and extra keys are:",remove_keys)
+    for k in remove_keys:
+        del data[k]
+    
+    
+datakeys = data.keys()
+
 with open("data_Fullset/shPSD_Morphometry.pkl","rb") as f:
     datash = pickle.load(f)
 
 def dataset(data,noise = 0.1):
-    size = data[list(data.keys())[0]].shape[0]
+    size = data[list(datakeys)[0]].shape[0]
     ies = arange(size)
     bt = {}
-    for key in data.keys():
+    for key in datakeys:
         bt[key] = data[key][ies]*clip(1.0+randn(size)*noise,0,None)
 
     Dmax = bt["maxDhead"]/1e3
@@ -34,23 +51,23 @@ def dataset_cd(data = None,cd = None,noise = 0.1,):
         data2 = data
     if cd == 'DiS':
         sel = data['nPSD']==2
-        for key in data.keys():
+        for key in datakeys:
             data2[key] = data[key][sel]
     if cd == 'SA':
         sel = data['SA']==1
-        for key in data.keys():
+        for key in datakeys:
             data2[key] = data[key][sel]
     if cd == 'noSA':
         sel = data['SA']!= 1
-        for key in data.keys():
+        for key in datakeys:
             data2[key] = data[key][sel]
     if cd == 'SiS':
         sel = data['nPSD']==1
-        for key in data.keys():
+        for key in datakeys:
             data2[key] = data[key][sel]
     if cd == 'Sp':
         sel = (data['nPSD']>=1)
-        for key in data.keys():
+        for key in datakeys:
             data2[key] = data[key][sel]
     return(dataset(data2,noise))
 
@@ -74,9 +91,9 @@ def ShInhwpos(noise = 0.1):
     return(bt,pos)
 
 def btset(data,size = 100,noise = 0.1):
-    ies = randint(data[list(data.keys())[0]].shape[0],size=size)
+    ies = randint(data[list(datakeys)[0]].shape[0],size=size)
     bt = {}
-    for key in data.keys():
+    for key in datakeys:
         bt[key] = data[key][ies]*clip(1.0+randn(size)*noise,0,None)
 
     Dmax = bt["maxDhead"]/1e3
@@ -96,23 +113,23 @@ def btset_cd(data = None,cd = None,size = 100,noise = 0.1,):
         data2 = data
     if cd == 'DiS':
         sel = data['nPSD']==2
-        for key in data.keys():
+        for key in datakeys:
             data2[key] = data[key][sel]
     if cd == 'SA':
         sel = data['SA']==1
-        for key in data.keys():
+        for key in datakeys:
             data2[key] = data[key][sel]
     if cd == 'noSA':
         sel = data['SA']!= 1
-        for key in data.keys():
+        for key in datakeys:
             data2[key] = data[key][sel]
     if cd == 'SiS':
         sel = data['nPSD']==1
-        for key in data.keys():
+        for key in datakeys:
             data2[key] = data[key][sel]
     if cd == 'Sp':
         sel = (data['nPSD']>=1)
-        for key in data.keys():
+        for key in datakeys:
             data2[key] = data[key][sel]
     return(btset(data2,size,noise))
     

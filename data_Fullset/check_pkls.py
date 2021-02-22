@@ -12,14 +12,12 @@ newfsetks = newfset.keys()
 fsetks = fset.keys()
 fset_crks = fset_cr.keys()
 
-print(fsetks == newfsetks)
-print(fset_crks == newfsetks)
-print(fset_crks == fsetks)
+#print(fset_crks == fsetks)
 
 print(len(list(fsetks)),len(list(newfsetks)))
 
 for key in newfsetks:
-    print(key,":", type(newfsetks.get(key)),type(fsetks.get(key)))
+    print(key,":", type(newfset.get(key)),type(fset.get(key)))
 
 for key in newfsetks:
     if fset.get(key) is not None:
