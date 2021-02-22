@@ -30,9 +30,9 @@ except:
 
 
 condition = sys.argv[1]
-folderstore = '/mnt/data/spinemodel/fconditions/'
-folderoutput = '/mnt/data/spinemodel/fconditions/'+condition+shflag+'/'
-folderstoresp = '/mnt/data/spinemodel/fconditions/spatial/'
+folderstore = './fconditions/'
+folderoutput = './fconditions/'+condition+shflag+'/'
+folderstoresp = './fconditions/spatial/'
 
 if not os.path.exists(folderoutput):
     os.makedirs(folderoutput)
@@ -310,9 +310,9 @@ bands = 1
 
 
 
-
+spinemodel_sketch = './Neuron_persp9.png'
 #savefig('f2x2.pdf',dpi = 300,tight_layout = True)
-im = Image.open('../Neuron_persp9.png')
+im = Image.open(spinemodel_sketch)
 height = im.size[1]
 
 for ifigure in range(4):
@@ -587,7 +587,7 @@ for ifigure in range(4):
 
 
     #savefig('f2x2.pdf',dpi = 300,tight_layout = True)
-    im = Image.open('../Neuron_persp9.png')
+    im = Image.open(spinemodel_sketch)
     height = im.size[1]
     im = np.array(im).astype(np.float) / 255
     fig = figure(figsize=(15,11.5))
@@ -1142,9 +1142,10 @@ with open(folderstore+"inhibition_v3_outPSD_"+condition+"_btstrp"+shflag+".pickl
 # In[28]:
 
 
+sketch_inh = './spine-inh_sketch_bothm.png'
 #height = im.size[1]
 #im = np.array(im).astype(np.float) / 255
-im = Image.open('../spine-inh_sketch_bothm.png')
+im = Image.open(sketch_inh)
 height = im.size[1]
 im = np.array(im).astype(np.float) / 255
 
@@ -1533,7 +1534,7 @@ print('Finished 2nd figure 1st version!')
 
 #height = im.size[1]
 #im = np.array(im).astype(np.float) / 255
-im = Image.open('../spine-inh_sketch_bothm.png')
+im = Image.open(sketch_inh)
 height = im.size[1]
 im = np.array(im).astype(np.float) / 255
 
@@ -1927,7 +1928,7 @@ with open(folderstore+"inhibition_v3_outPSD_allspn_"+condition+"_btstrp"+shflag+
 
 #height = im.size[1]
 #im = np.array(im).astype(np.float) / 255
-im = Image.open('../spine-inh_sketch_bothm.png')
+im = Image.open(sketch_inh)
 height = im.size[1]
 im = np.array(im).astype(np.float) / 255
 
@@ -2322,7 +2323,7 @@ with open(folderstore+"inhibition_v3_outPSD_allspn_"+condition+"_btstrp"+shflag+
 
 #height = im.size[1]
 #im = np.array(im).astype(np.float) / 255
-im = Image.open('../spine-inh_sketch_bothm.png')
+im = Image.open(sketch_inh)
 height = im.size[1]
 im = np.array(im).astype(np.float) / 255
 
