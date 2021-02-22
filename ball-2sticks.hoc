@@ -33,7 +33,7 @@ access dendA1prox
 connect dendA1(0),1
 define_shape()
 
-// Para que es esto?
+// 
 has_ais = 0
 
 proc define_lengths() {
