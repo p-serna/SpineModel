@@ -318,7 +318,7 @@ im = Image.open(spinemodel_sketch)
 height = im.size[1]
 
 for ifigure in range(4):
-    im = np.array(im).astype(np.float) / 255
+    im = np.array(im).astype(float) / 255
     fig = figure(figsize=(15,11.5*1.20))
     gs = mpl.gridspec.GridSpec(3, 4,  wspace=0.35, hspace=.35) # 2x3 grid
 
@@ -591,7 +591,7 @@ for ifigure in range(4):
     #savefig('f2x2.pdf',dpi = 300)
     im = Image.open(spinemodel_sketch)
     height = im.size[1]
-    im = np.array(im).astype(np.float) / 255
+    im = np.array(im).astype(float) / 255
     fig = figure(figsize=(15,11.5))
     gs = mpl.gridspec.GridSpec(3, 4,  wspace=0.35, hspace=.35) # 2x3 grid
 
@@ -1145,12 +1145,12 @@ with open(folderstore+"inhibition_v3_outPSD_"+condition+"_btstrp"+shflag+".pickl
 
 
 #height = im.size[1]
-#im = np.array(im).astype(np.float) / 255
+#im = np.array(im).astype(float) / 255
 sketch_inh = './spine-inh_sketch_bothm.png'
 
 im = Image.open(sketch_inh)
 height = im.size[1]
-im = np.array(im).astype(np.float) / 255
+im = np.array(im).astype(float) / 255
 
 fig = figure(figsize=(15,7.))
 gs = mpl.gridspec.GridSpec(6,8,wspace=3, hspace=3) # 2x3 grid
@@ -1536,10 +1536,10 @@ fig.savefig(folderoutput+'f2v3_b.png',dpi = 300)
 print('Finished 2nd figure 1st version!')
 
 #height = im.size[1]
-#im = np.array(im).astype(np.float) / 255
+#im = np.array(im).astype(float) / 255
 im = Image.open(sketch_inh)
 height = im.size[1]
-im = np.array(im).astype(np.float) / 255
+im = np.array(im).astype(float) / 255
 
 fig = figure(figsize=(15,7.))
 gs = mpl.gridspec.GridSpec(6,8,wspace=3, hspace=3) # 2x3 grid
@@ -1930,10 +1930,10 @@ with open(folderstore+"inhibition_v3_outPSD_allspn_"+condition+"_btstrp"+shflag+
     tdels_b,inhtimSis_b,_,tauSis_b,tauSis2_b,inhtimSism_b = pickle.load(f)
 
 #height = im.size[1]
-#im = np.array(im).astype(np.float) / 255
+#im = np.array(im).astype(float) / 255
 im = Image.open(sketch_inh)
 height = im.size[1]
-im = np.array(im).astype(np.float) / 255
+im = np.array(im).astype(float) / 255
 
 fig = figure(figsize=(15,7.))
 gs = mpl.gridspec.GridSpec(6,8,wspace=3, hspace=3) # 2x3 grid
@@ -2325,10 +2325,10 @@ with open(folderstore+"inhibition_v3_outPSD_allspn_"+condition+"_btstrp"+shflag+
     tdels_b,inhtimSis_b,_,tauSis_b,tauSis2_b,inhtimSism_b = pickle.load(f)
 
 #height = im.size[1]
-#im = np.array(im).astype(np.float) / 255
+#im = np.array(im).astype(float) / 255
 im = Image.open(sketch_inh)
 height = im.size[1]
-im = np.array(im).astype(np.float) / 255
+im = np.array(im).astype(float) / 255
 
 fig = figure(figsize=(15,7.))
 gs = mpl.gridspec.GridSpec(6,8,wspace=3, hspace=3) # 2x3 grid

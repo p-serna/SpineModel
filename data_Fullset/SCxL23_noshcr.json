@@ -1,0 +1,17 @@
+{
+"gtrG": 0.0058596073805616536 ,
+"gtrN":  0.0034375 ,
+"gtrA":  0.00315,
+"AMPAtaus": [0.1,1.8],
+"GABAtaus": [0.5,15.0],
+"NMDAtaus": [0.5,17.0],
+"dendDiam": 0.65,
+"rm": 12e3,
+"ra": 250,
+"factor2nddend": 75,
+"len2nddend": 70,
+"inhOutside": true,
+"factorspinesdend": 3.34,
+"dendsizeL0": 10,
+"denddiam0": 1.24
+}
