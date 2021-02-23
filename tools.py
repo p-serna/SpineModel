@@ -2,6 +2,9 @@
 import numpy as np
 from scipy.integrate import simps
 
+def showmessage(message, length = 40):
+    print(message+"."*(length-len(message)))
+
 def itertis(t1,t2,A1,A2):
     te = t1*t2/(t1-t2)
     numtt = (t2/t1)**(te/t1)-(t2/t1)**(te/t2)
@@ -71,7 +74,7 @@ def getint(x):
     sh = xc.shape[0]
     xmed = xc[sh//2]
     s0= int(sh*(1-.6827)/2)
-    s1 = sh-s0
+    s1 = sh-s0-1
     x0 = xc[s0]
     x1 = xc[s1]
     s0b= int(sh*(1-.95)/2)

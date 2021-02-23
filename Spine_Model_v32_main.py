@@ -7,7 +7,7 @@ import pickle
 import lib as lb
 import storage as st
 import tools as tools
-from tools import *
+#from tools import *
 
 import os
 import sys
@@ -21,7 +21,7 @@ try:
     assert len(sys.argv)==5, 'No correct number of arguments'
     from bootstrap_unshr import *
     from data_Fullset import SCxL23 as exppar
-    print('No shrinkage correction')
+    #print('No shrinkage correction')
     shflag = ''
 except:
     assert len(sys.argv)==6, 'No correct number of arguments'
@@ -29,12 +29,12 @@ except:
     if shrinkage > 0.0:
         from bootstrap_shcr import *
         from data_Fullset import SCxL23_shcr as exppar
-        print('We correct shrinkage')
+        #print('We correct shrinkage')
         shflag = 'sh'    
     else:
         from bootstrap_unshr import *
         from data_Fullset import SCxL23 as exppar
-        print('No shrinkage correction')
+        #print('No shrinkage correction')
         shflag = ''    
 
 exppar.gtrG = exppar.gtrG*float(sys.argv[1]) # 700 pS
@@ -47,7 +47,7 @@ GABAErev = float(sys.argv[2])
 # ~ condition = 'nosh_VC700Ecl80'
 condition = sys.argv[4]
     
-print('Hey!')
+#print('Hey!')
 
 # Parameter definitions
 # Data is stored here      
@@ -71,9 +71,9 @@ data.model = model.__dict__
 model.soma.L = 20
 #model.comp['B1'].L = 200
 #model.comp['B1'].diam = 10
-print(model.soma.L,model.soma.diam,model.soma(0.5).area(),model.dend[-1](0.5).area())
+#print(model.soma.L,model.soma.diam,model.soma(0.5).area(),model.dend[-1](0.5).area())
 
-print("Topology:")
+print("Neuron topology:")
 print(lb.h.topology())
 
 
@@ -100,8 +100,8 @@ sp = model.spne[0]
 sp.L = dis["L"].mean()
 sp.diam = dis["D"].mean()
 
-print("Area Volume Ah Vh")
-print(sp(0.5).area(),sp(0.5).volume(),dis["Ah"][0]/dis["AhA0"][0],dis["Vh"][0])
+#print("Area Volume Ah Vh")
+#print(sp(0.5).area(),sp(0.5).volume(),dis["Ah"][0]/dis["AhA0"][0],dis["Vh"][0])
 
 
 # ### Excitatory synapse 
@@ -318,10 +318,10 @@ rhosp = 1.3
 diamneck = sps['meanDneck'].mean()/1e3
 dendareaperL = rhosp*(mean(sps['Ah'])+(pi*diamneck))
 factor = dendareaperL/(pi*dendA1.diam)
-print(factor)
+#print(factor)
 factorsp = factor
 factordd = (pi*dendA1.diam-(pi*diamneck**2/4.0)*rhosp)/(pi*dendA1.diam)
-print(factordd,factordd+factorsp)
+#print(factordd,factordd+factorsp)
 
 factor = factordd+factorsp
 factor = exppar.factorspinesdend
@@ -340,7 +340,7 @@ dendA2.nseg = int(dendA2.L//10)+1
 
 dendA1.nseg = 10
 dendA2.nseg = 10
-print(dendA1.nseg,dendA2.nseg)
+#print(dendA1.nseg,dendA2.nseg)
 
 
 # In[18]:
@@ -584,6 +584,7 @@ spdata['Rneck'] = spdata['Rmorph']*2.5
 
 # In[30]:
 
+tools.showmessage("Baseline experiment")
 
 td = 500
 res = simulateSet(model,spdata,tG = td,ton = 50,
@@ -622,24 +623,24 @@ vavg,mes,vtracs,vtracsD,vtracsS,Ctracs,me2,me3,_ = res
 pp0 = 0.2
 pp1 = 0.8
 vtt = clip(vtracs-EL0,0,100)
-times0 = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-t9010r = get_p0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
-t90100 = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+times0 = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+t9010r = tools.get_p0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+t90100 = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
 
 vtt = clip(vtracsS-EL0,0,100)
-times0S = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-t9010rS = get_p0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
-t90100S = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+times0S = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+t9010rS = tools.get_p0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+t90100S = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
 
 vtt = clip(vtracsD-EL0,0,100)
-times0D = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-t9010rD = get_p0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
-t90100D = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+times0D = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+t9010rD = tools.get_p0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+t90100D = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
 
 vtt = clip(Ctracs,0,100)
-times0C = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-t9010rC = get_p0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
-t90100C = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+times0C = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+t9010rC = tools.get_p0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+t90100C = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
 with open(folderstore+"All_baseline_datasetv3_times_"+condition+shflag+".pickle","wb") as f:
     pickle.dump([t90100, t90100S, t90100D, t90100C,
                 t9010r, t9010rS, t9010rD, t9010rC],f) 
@@ -652,6 +653,7 @@ with open(folderstore+"All_baseline_datasetv3_times_"+condition+shflag+".pickle"
 
 # In[35]:
 
+tools.showmessage("Experiments with inhibitory synapses")
 
 iPSDsh, posish = ShInhwpos(noise=0.0)
 
@@ -678,6 +680,8 @@ GABA2.e = 0.0
 gtrA = 0.0
 gtrN = 0.0
 gtrG = exppar.gtrG
+
+
 
 res = simulateSet(model,spdatash,tG = 0,ton = 50,toffset = 70,
                   t_stop = 500, EL = EL0,btsr = ones(9)==1,
@@ -712,7 +716,7 @@ with open(folderstore+"All_baseline_depinhv3_"+condition+shflag+".pickle","wb") 
 
 
 sel = np.arange(len(spdata['A2']))[spdata['A2']>0]
-print(sel)
+#print(sel)
 
 
 # In[40]:
@@ -765,6 +769,8 @@ def getint(x):
 
 # In[45]:
 
+tools.showmessage("Experiments varying delta t")
+
 
 #spdata['Rneck'] = Rneck0#*2
 tdels = [-49,-30,-20,-15,-10,-7.5,-5,-3.5,-2,-1,-0.5,0,0.5,1.0,2.0,2.75,3.5,5.0,7.5,10.0,15.0,20.,30.,50]
@@ -783,20 +789,20 @@ EL0 = -70
 vavg0,mes0,vtracs0,vtracsD0,vtracsS0,Ctracs0,me20,me30, trec = simulateSet(model,dis,tG = 100,ton = 50,toffset = 100,t_stop = 500, EL = EL0,btsr = ones(9)==1,VDCC = VDCCa)
 
 vtt = clip(vtracs0-EL0,0,100)
-times0 = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-t90100 = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+times0 = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+t90100 = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
 
 vtt = clip(vtracsS0-EL0,0,100)
-times0S = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-t90100S = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+times0S = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+t90100S = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
 
 vtt = clip(vtracsD0-EL0,0,100)
-times0D = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-t90100D = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+times0D = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+t90100D = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
 
 vtt = clip(Ctracs0,0,100)
-times0C = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-t90100C = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+times0C = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+t90100C = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
 
 
 for i,td in enumerate(tdels):
@@ -804,40 +810,40 @@ for i,td in enumerate(tdels):
     
     # EPSP in spine head
     vtt = clip(vtracs-EL0,0,100)
-    times = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-    t9010 = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
-    dtime[i,:5] = getint(times/times0)
-    dtime2[i,:5] = getint(t9010/t90100)
+    times = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+    t9010 = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+    dtime[i,:5] = tools.getint(times/times0)
+    dtime2[i,:5] = tools.getint(t9010/t90100)
 
 
     # EPSP In the soma
     vtt = clip(vtracsS-EL0,0,100)
-    times = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-    t9010 = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
-    dtime[i,5:10] = getint(times/times0S)
-    dtime2[i,5:10] = getint(t9010/t90100S)
+    times = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+    t9010 = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+    dtime[i,5:10] = tools.getint(times/times0S)
+    dtime2[i,5:10] = tools.getint(t9010/t90100S)
     
     # EPSP In the soma
     vtt = clip(vtracsD-EL0,0,100)
-    times = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-    t9010 = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
-    dtime[i,15:20] = getint(times/times0D)
-    dtime2[i,15:20] = getint(t9010/t90100D)
+    times = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+    t9010 = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+    dtime[i,15:20] = tools.getint(times/times0D)
+    dtime2[i,15:20] = tools.getint(t9010/t90100D)
     
     # For calcium in spine
     vtt = clip(Ctracs,0,100)
-    times = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-    t9010 = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
-    dtime[i,10:15] = getint(times/times0C)
-    dtime2[i,10:15] = getint(t9010/t90100C)
+    times = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+    t9010 = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+    dtime[i,10:15] = tools.getint(times/times0C)
+    dtime2[i,10:15] = tools.getint(t9010/t90100C)
     
     # Statistics
     #data[i,:] = mes.mean(axis=0)
     #datt0 = mes[:,1:5]/mes0[:,1:5]
     #data2[i,:] = concatenate((datt0.mean(axis=0),datt0.std(axis=0)))
     for j in range(1,5):
-        data[i,(5*(j-1)):(5*(j))] = getint(mes[:,j])
-        data2[i,(5*(j-1)):(5*(j))] = getint(mes[:,j]/mes0[:,j])
+        data[i,(5*(j-1)):(5*(j))] = tools.getint(mes[:,j])
+        data2[i,(5*(j-1)):(5*(j))] = tools.getint(mes[:,j]/mes0[:,j])
         datam[i,(2*(j-1)):(2*(j))] = ((mes[:,j]/mes0[:,j]).mean(),(mes[:,j]/mes0[:,j]).std())
 
 with open(folderstore+"inhibition_v3_"+condition+shflag+".pickle","wb") as f:
@@ -849,33 +855,44 @@ with open(folderstore+"inhibition_v3_"+condition+shflag+".pickle","wb") as f:
 
 
 vtt = clip(vtracs0-EL0,0,100)
-times0 = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-print(times0.shape)
+times0 = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+#print(times0.shape)
 
 
 # In[53]:
+
+
+
+tools.showmessage("Experiments fixed delta t")
 
 
 td = 10
 vavg,mes,vtracs,vtracsD,vtracsS,Ctracs,me2,me3,_ = simulateSet(model,dis,tG = td,ton = 50,toffset = 70,t_stop = 500, EL = EL0,btsr = ones(9)==1,VDCC = VDCCa)
 with open(folderstore+"dis_glu_ga10v3_"+condition+shflag+".pickle","wb") as f:
     pickle.dump([vavg,mes,vtracs,vtracsD,vtracsS,Ctracs],f) 
-    
+
+tools.showmessage("Experiments fixed delta t = -10")
+
 td = -10
 vavg,mes,vtracs,vtracsD,vtracsS,Ctracs,me2,me3,_ = simulateSet(model,dis,tG = td,ton = 50,toffset = 70,t_stop = 500, EL = EL0,btsr = ones(9)==1,VDCC = VDCCa)
 with open(folderstore+"dis_ga_glu10v3_"+condition+shflag+".pickle","wb") as f:
     pickle.dump([vavg,mes,vtracs,vtracsD,vtracsS,Ctracs],f) 
-      
+
+tools.showmessage("Experiments fixed delta t = 5")
 td = 5
 vavg,mes,vtracs,vtracsD,vtracsS,Ctracs,me2,me3,_ = simulateSet(model,dis,tG = td,ton = 50,toffset = 70,t_stop = 500, EL = EL0,btsr = ones(9)==1,VDCC = VDCCa)
 with open(folderstore+"dis_glu_ga05v3_"+condition+shflag+".pickle","wb") as f:
     pickle.dump([vavg,mes,vtracs,vtracsD,vtracsS,Ctracs],f) 
-    
+
+
+tools.showmessage("Experiments fixed delta t = -5")
 td = -5
 vavg,mes,vtracs,vtracsD,vtracsS,Ctracs,me2,me3,_ = simulateSet(model,dis,tG = td,ton = 50,toffset = 70,t_stop = 500, EL = EL0,btsr = ones(9)==1,VDCC = VDCCa)
 with open(folderstore+"dis_ga_glu05v3_"+condition+shflag+".pickle","wb") as f:
     pickle.dump([vavg,mes,vtracs,vtracsD,vtracsS,Ctracs],f) 
     
+
+tools.showmessage("Experiments fixed delta t = 500")
     
 td = 500
 vavg,mes,vtracs,vtracsD,vtracsS,Ctracs,me2,me3,_ = simulateSet(model,dis,tG = td,ton = 50,toffset = 70,t_stop = 500, EL = EL0,btsr = ones(9)==1,VDCC = VDCCa)
@@ -886,32 +903,39 @@ td = 500
 
 vavg0,mes0,vtracs0,vtracsD0,vtracsS0,Ctracs0,me20,me30,_ = simulateSet(model,dis,tG = td,ton = 50,toffset = 70,t_stop = 500, EL = EL0,btsr = ones(9)==1,VDCC = VDCCa,dendrec=False)
    
+
+tools.showmessage("Experiments fixed delta t = -2")
 td = -2
 vavg,mes,vtracs,vtracsD,vtracsS,Ctracs,me2,me3,_ = simulateSet(model,dis,tG = td,ton = 50,toffset = 70,t_stop = 500, EL = EL0,btsr = ones(9)==1,VDCC = VDCCa)
 with open(folderstore+"dis_ga_glu02v3_"+condition+shflag+".pickle","wb") as f:
     pickle.dump([dis,mes,mes0],f) 
 
+
+tools.showmessage("Experiments fixed delta t = 2")
 td = 2
 vavg,mes,vtracs,vtracsD,vtracsS,Ctracs,me2,me3,_ = simulateSet(model,dis,tG = td,ton = 50,toffset = 70,t_stop = 500, EL = EL0,btsr = ones(9)==1,VDCC = VDCCa)
+
+          
 
 vtt = clip(vtracs0-EL0,0,100)
 if times_biexp:
     times0 = get_atimes(vtt,ton=3000)
 else:
-    times0, tt, trise = get_atimes(vtt,ton=3000)
-    times0 = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+    times0, tt, trise = tools.get_atimes(vtt,ton=3000)
+    times0 = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
 
 vtt = clip(vtracs-EL0,0,100)
 if times_biexp:
-    times = get_atimes(vtt,ton=3000)
+    times = tools.get_atimes(vtt,ton=3000)
 else:
-    times, tt, trise = get_atimes(vtt,ton=3000)
-    times = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+    times, tt, trise = tools.get_atimes(vtt,ton=3000)
+    times = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
 
 with open(folderstore+"dis_glu_ga02v3_"+condition+shflag+".pickle","wb") as f:
     pickle.dump([dis,mes,mes0,times,times0],f) 
     
     
+tools.showmessage("Experiments for external inh")
 
 
 # In[54]:
@@ -940,20 +964,20 @@ res = simulateSet(model,dis,tG = 100,ton = 50,
 vavg0,mes0,vtracs0,vtracsD0,vtracsS0,Ctracs0,me20,me30, trec = res
 
 vtt = clip(vtracs0-EL0,0,100)
-times0 = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-t90100 = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+times0 = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+t90100 = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
 
 vtt = clip(vtracsS0-EL0,0,100)
-times0S = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-t90100S = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+times0S = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+t90100S = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
 
 vtt = clip(vtracsD0-EL0,0,100)
-times0D = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-t90100D = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+times0D = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+t90100D = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
 
 vtt = clip(Ctracs0,0,100)
-times0C = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-t90100C = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+times0C = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+t90100C = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
 
 
 
@@ -965,40 +989,40 @@ for i,td in enumerate(tdels):
     vavg,mes,vtracs,vtracsD,vtracsS,Ctracs,me2,me3,_  = res
     # EPSP in spine head
     vtt = clip(vtracs-EL0,0,100)
-    times = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-    t9010 = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
-    dtime[i,:5] = getint(times/times0)
-    dtime2[i,:5] = getint(t9010/t90100)
+    times = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+    t9010 = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+    dtime[i,:5] = tools.getint(times/times0)
+    dtime2[i,:5] = tools.getint(t9010/t90100)
 
 
     # EPSP In the soma
     vtt = clip(vtracsS-EL0,0,100)
-    times = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-    t9010 = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
-    dtime[i,5:10] = getint(times/times0S)
-    dtime2[i,5:10] = getint(t9010/t90100S)
+    times = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+    t9010 = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+    dtime[i,5:10] = tools.getint(times/times0S)
+    dtime2[i,5:10] = tools.getint(t9010/t90100S)
     
     # EPSP In the soma
     vtt = clip(vtracsD-EL0,0,100)
-    times = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-    t9010 = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
-    dtime[i,15:20] = getint(times/times0D)
-    dtime2[i,15:20] = getint(t9010/t90100D)
+    times = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+    t9010 = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+    dtime[i,15:20] = tools.getint(times/times0D)
+    dtime2[i,15:20] = tools.getint(t9010/t90100D)
     
     # For calcium in spine
     vtt = clip(Ctracs,0,100)
-    times = get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
-    t9010 = get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
-    dtime[i,10:15] = getint(times/times0C)
-    dtime2[i,10:15] = getint(t9010/t90100C)
+    times = tools.get_FWHMtimes(vtt, v0 =0, dt = lb.h.dt)
+    t9010 = tools.get_postp0p1times(vtt,p0=pp0,p1= pp1, dt = lb.h.dt)
+    dtime[i,10:15] = tools.getint(times/times0C)
+    dtime2[i,10:15] = tools.getint(t9010/t90100C)
     
     # Statistics
     #data[i,:] = mes.mean(axis=0)
     #datt0 = mes[:,1:5]/mes0[:,1:5]
     #data2[i,:] = concatenate((datt0.mean(axis=0),datt0.std(axis=0)))
     for j in range(1,5):
-        data[i,(5*(j-1)):(5*(j))] = getint(mes[:,j])
-        data2[i,(5*(j-1)):(5*(j))] = getint(mes[:,j]/mes0[:,j])
+        data[i,(5*(j-1)):(5*(j))] = tools.getint(mes[:,j])
+        data2[i,(5*(j-1)):(5*(j))] = tools.getint(mes[:,j]/mes0[:,j])
         datam[i,(2*(j-1)):(2*(j))] = ((mes[:,j]/mes0[:,j]).mean(),(mes[:,j]/mes0[:,j]).std())
 
 with open(folderstore+"inhibition_v3_outPSD_"+condition+shflag+".pickle","wb") as f:

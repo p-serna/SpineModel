@@ -41,12 +41,12 @@ if not os.path.exists(folderoutput):
 
 
 rc('text',usetex=True)
-rc('text.latex',preamble='''\\usepackage{amssymb}\n\\usepackage{siunitx}\n\DeclareSIUnit\Molar{\\textsc{m}}\n
-\def\\V{\\textrm{V}}\n
-\def\\A{\\textrm{A}}
-\def\\C{\\textrm{C}}
-\def\\R{\\textrm{R}}
-\def\\t{\\textrm{t}}
+rc('text.latex',preamble='''\\usepackage{amssymb}\n\\usepackage{siunitx}\n\DeclareSIUnit\Molar{M}\n
+\def\\V{{V}}\n
+\def\\A{{A}}
+\def\\C{{C}}
+\def\\R{{R}}
+\def\\et{{t}}
 ''')
 
 rcParams['savefig.pad_inches'] = 0
@@ -268,7 +268,7 @@ def plot_syninputs(fig,ax):
     ax.set_xlim(-2,50)
     ax.set_ylim(-2.1,1.15)
     ax.set_xlabel('t (\si{\milli\second})')
-    ax.set_ylabel('$\\textrm{G}/\\textrm{G}_{max}$',rotation=0, 
+    ax.set_ylabel('${G}/{G}_{max}$',rotation=0, 
                horizontalalignment='left',
                verticalalignment='top')
     ax.yaxis.set_label_coords(0,1.05)
@@ -423,22 +423,22 @@ for ifigure in range(4):
     # Accesories
 
 
-    ax2.set_xlabel("$\\R_\\textrm{\Large Neck}\, (\si{\Mohm})$")
-    # ax2.set_ylabel("$\\frac{\\V_\\textrm{\Large max, shaft}}{\\V_\\textrm{\Large max, spine}}$",rotation=0, 
+    ax2.set_xlabel("$\\R_{\Large Neck}\, (\si{\Mohm})$")
+    # ax2.set_ylabel("$\\frac{\\V_{\Large max, shaft}}{\\V_{\Large max, spine}}$",rotation=0, 
     #                horizontalalignment='left',
     #                verticalalignment='top')
-    #ax2.set_ylabel("$\\frac{\\V_\\textrm{\Large max, shaft}}{\\V_\\textrm{\Large max, spine}}$",rotation=0, 
+    #ax2.set_ylabel("$\\frac{\\V_{\Large max, shaft}}{\\V_{\Large max, spine}}$",rotation=0, 
     #               horizontalalignment='left',
     #               verticalalignment='top')
 
-    ax4.set_xlabel("$\\A_\\textrm{\Large ePSD}$ (\si{\square\micro\meter})")
-    #ax4.set_ylabel("$[\\textrm{Ca}^{2+}]_\\textrm{\Large max}\, $(\si{\micro\Molar})",rotation=0, 
+    ax4.set_xlabel("$\\A_{\Large ePSD}$ (\si{\square\micro\meter})")
+    #ax4.set_ylabel("$[{Ca}^{2+}]_{\Large max}\, $(\si{\micro\Molar})",rotation=0, 
     #               horizontalalignment='left',
     #               verticalalignment='top')
     #ax3.set_xlabel("- $I_{s,max}$(pA)")
-    ax3.set_xlabel("$\\A_\\textrm{\Large ePSD}$ (\si{\square\micro\meter})")
+    ax3.set_xlabel("$\\A_{\Large ePSD}$ (\si{\square\micro\meter})")
 
-    #ax3.set_ylabel("$\Delta\\V_\\textrm{\Large max}\,$ (\si{\milli\\volt})",rotation=0, 
+    #ax3.set_ylabel("$\Delta\\V_{\Large max}\,$ (\si{\milli\\volt})",rotation=0, 
     #               horizontalalignment='left',
     #               verticalalignment='top')
     ax3.tick_params(direction="in")
@@ -731,22 +731,22 @@ for ifigure in range(4):
     # Accesories
 
 
-    ax2.set_xlabel("$\\R_\\textrm{\Large Neck}\, (\si{\Mohm})$")
-    # ax2.set_ylabel("$\\frac{\\V_\\textrm{\Large max, shaft}}{\\V_\\textrm{\Large max, spine}}$",rotation=0, 
+    ax2.set_xlabel("$\\R_{\Large Neck}\, (\si{\Mohm})$")
+    # ax2.set_ylabel("$\\frac{\\V_{\Large max, shaft}}{\\V_{\Large max, spine}}$",rotation=0, 
     #                horizontalalignment='left',
     #                verticalalignment='top')
-    #ax2.set_ylabel("$\\frac{\\V_\\textrm{\Large max, shaft}}{\\V_\\textrm{\Large max, spine}}$",rotation=0, 
+    #ax2.set_ylabel("$\\frac{\\V_{\Large max, shaft}}{\\V_{\Large max, spine}}$",rotation=0, 
     #               horizontalalignment='left',
     #               verticalalignment='top')
 
-    ax4.set_xlabel("$\\A_\\textrm{\Large ePSD}$ (\si{\square\micro\meter})")
-    #ax4.set_ylabel("$[\\textrm{Ca}^{2+}]_\\textrm{\Large max}\, $(\si{\micro\Molar})",rotation=0, 
+    ax4.set_xlabel("$\\A_{\Large ePSD}$ (\si{\square\micro\meter})")
+    #ax4.set_ylabel("$[{Ca}^{2+}]_{\Large max}\, $(\si{\micro\Molar})",rotation=0, 
     #               horizontalalignment='left',
     #               verticalalignment='top')
     #ax3.set_xlabel("- $I_{s,max}$(pA)")
-    ax3.set_xlabel("$\\A_\\textrm{\Large ePSD}$ (\si{\square\micro\meter})")
+    ax3.set_xlabel("$\\A_{\Large ePSD}$ (\si{\square\micro\meter})")
 
-    #ax3.set_ylabel("$\Delta\\V_\\textrm{\Large max}\,$ (\si{\milli\\volt})",rotation=0, 
+    #ax3.set_ylabel("$\Delta\\V_{\Large max}\,$ (\si{\milli\\volt})",rotation=0, 
     #               horizontalalignment='left',
     #               verticalalignment='top')
     ax3.tick_params(direction="in")
@@ -1072,13 +1072,13 @@ def plot_syninputsdelta(fig,ax):
     ax.set_xlim(-2,70)
     ax.set_ylim(-2.1,1.6)
     ax.set_xlabel('t (\si{\milli\second})')
-    ax.set_ylabel('$\\textrm{G}/\\textrm{G}_{max}$',rotation=0, 
+    ax.set_ylabel('${G}/{G}_{max}$',rotation=0, 
                horizontalalignment='left',
                verticalalignment='top')
     ax.yaxis.set_label_coords(0,1.05)
     ax.vlines(20,-1.015*2,1.03-dy,linestyle='--')
     #ax.legend(loc = (0.6,.885))
-    ax.annotate('$\Delta \\t$',xy = (6.5,1.05-dy))
+    ax.annotate('$\Delta t$',xy = (6.5,1.05-dy))
     ax.annotate('NMDA',xy = (50,0.1))
     ax.annotate('AMPA',xy = (50,-0.95))
     ax.annotate('GABA',xy = (50,-1.85))
@@ -1295,7 +1295,7 @@ ax4.spines['bottom'].set_position(('data',0.00))
 ax4.spines['top'].set_color('none')
 #ax4.xaxis.set_visible(False)
 #ax4.xaxis.tick_top()
-ax4.set_ylabel('$S_{[{\\textrm Ca}^{2+}]}$',rotation = 0 , 
+ax4.set_ylabel('$S_{[{ Ca}^{2+}]}$',rotation = 0 , 
                horizontalalignment='left',
                verticalalignment='top')
 
@@ -1314,7 +1314,7 @@ ax0b.yaxis.set_major_locator(FixedLocator(arange(4,12,2)))
 #ax0b.spines['right'].set_position(('data',0.65))
 #ax0b.spines['top'].set_color('none')
 #ax0b.xaxis.set_visible(False)
-ax0b.set_ylabel('$\\tau/\\tau_\infty$',rotation = 0 , 
+ax0b.set_ylabel('$tau/tau_\infty$',rotation = 0 , 
                horizontalalignment='left',
                verticalalignment='top')
 
@@ -1342,14 +1342,14 @@ ax1.set_ylabel('$\\V$ (\si{\milli\\volt})',rotation = 0 ,
 ax3.set_ylabel('$\\V$ (\si{\milli\\volt})',rotation = 0 , 
                horizontalalignment='left',
                verticalalignment='top')
-ax1.set_xlabel('$\\t$ (\si{\milli\second}) ')
-ax3.set_xlabel('$\\t$ (\si{\milli\second}) ')
+ax1.set_xlabel('$t$ (\si{\milli\second}) ')
+ax3.set_xlabel('$t$ (\si{\milli\second}) ')
 
 
 
-ax0b.set_xlabel('$\Delta \\t$ (\si{\milli\second}) ')
-ax4.set_xlabel('$\Delta \\t$ (\si{\milli\second}) ')
-ax5.set_xlabel('$\Delta \\t$ (\si{\milli\second}) ')
+ax0b.set_xlabel('$\Delta t$ (\si{\milli\second}) ')
+ax4.set_xlabel('$\Delta t$ (\si{\milli\second}) ')
+ax5.set_xlabel('$\Delta t$ (\si{\milli\second}) ')
 ax2.set_ylabel('$S_\\V$ in spine',rotation = 0 , 
                horizontalalignment='left',
                verticalalignment='top')
@@ -1420,7 +1420,7 @@ ax3.annotate("", xy=(2+1,20-2), xytext=(2+11,20-2),
 ax3.vlines(2+1,9.76,19,linestyle='--')
 ax3.vlines(2+11,2.44,19,linestyle='--')
 
-ax3.annotate('$\\tau$',xy = (27-20,21-2))
+ax3.annotate('$tau$',xy = (27-20,21-2))
 
 ax1.annotate('DiS: $V_{\\rm spine}$',xy = (40,35))
 
@@ -1684,7 +1684,7 @@ ax4.spines['bottom'].set_position(('data',0.00))
 ax4.spines['top'].set_color('none')
 #ax4.xaxis.set_visible(False)
 #ax4.xaxis.tick_top()
-ax4.set_ylabel('$S_{[{\\textrm Ca}^{2+}]}$',rotation = 0 , 
+ax4.set_ylabel('$S_{[{ Ca}^{2+}]}$',rotation = 0 , 
                horizontalalignment='left',
                verticalalignment='top')
 
@@ -1703,7 +1703,7 @@ ax0b.yaxis.set_major_locator(FixedLocator(arange(4,12,2)))
 #ax0b.spines['right'].set_position(('data',0.65))
 #ax0b.spines['top'].set_color('none')
 #ax0b.xaxis.set_visible(False)
-ax0b.set_ylabel('$\\tau/\\tau_\infty$',rotation = 0 , 
+ax0b.set_ylabel('$tau/tau_\infty$',rotation = 0 , 
                horizontalalignment='left',
                verticalalignment='top')
 
@@ -1731,14 +1731,14 @@ ax1.set_ylabel('$\\V$ (\si{\milli\\volt})',rotation = 0 ,
 ax3.set_ylabel('$\\V$ (\si{\milli\\volt})',rotation = 0 , 
                horizontalalignment='left',
                verticalalignment='top')
-ax1.set_xlabel('$\\t$ (\si{\milli\second}) ')
-ax3.set_xlabel('$\\t$ (\si{\milli\second}) ')
+ax1.set_xlabel('$t$ (\si{\milli\second}) ')
+ax3.set_xlabel('$t$ (\si{\milli\second}) ')
 
 
 
-ax0b.set_xlabel('$\Delta \\t$ (\si{\milli\second}) ')
-ax4.set_xlabel('$\Delta \\t$ (\si{\milli\second}) ')
-ax5.set_xlabel('$\Delta \\t$ (\si{\milli\second}) ')
+ax0b.set_xlabel('$\Delta t$ (\si{\milli\second}) ')
+ax4.set_xlabel('$\Delta t$ (\si{\milli\second}) ')
+ax5.set_xlabel('$\Delta t$ (\si{\milli\second}) ')
 ax2.set_ylabel('$S_\\V$ in spine',rotation = 0 , 
                horizontalalignment='left',
                verticalalignment='top')
@@ -1808,7 +1808,7 @@ ax3.annotate("", xy=(2+1,20-2), xytext=(2+11,20-2),
 ax3.vlines(2+1,9.76,19,linestyle='--')
 ax3.vlines(2+11,2.44,19,linestyle='--')
 
-ax3.annotate('$\\tau$',xy = (27-20,21-2))
+ax3.annotate('$tau$',xy = (27-20,21-2))
 
 ax1.annotate('DiS: $V_{\\rm spine}$',xy = (40,35))
 
@@ -2078,7 +2078,7 @@ ax4.spines['bottom'].set_position(('data',0.00))
 ax4.spines['top'].set_color('none')
 #ax4.xaxis.set_visible(False)
 #ax4.xaxis.tick_top()
-ax4.set_ylabel('$S_{[{\\textrm Ca}^{2+}]}$',rotation = 0 , 
+ax4.set_ylabel('$S_{[{ Ca}^{2+}]}$',rotation = 0 , 
                horizontalalignment='left',
                verticalalignment='top')
 
@@ -2097,7 +2097,7 @@ ax0b.yaxis.set_major_locator(FixedLocator(arange(4,12,2)))
 #ax0b.spines['right'].set_position(('data',0.65))
 #ax0b.spines['top'].set_color('none')
 #ax0b.xaxis.set_visible(False)
-ax0b.set_ylabel('$\\tau/\\tau_\infty$',rotation = 0 , 
+ax0b.set_ylabel('$tau/tau_\infty$',rotation = 0 , 
                horizontalalignment='left',
                verticalalignment='top')
 
@@ -2125,14 +2125,14 @@ ax1.set_ylabel('$\\V$ (\si{\milli\\volt})',rotation = 0 ,
 ax3.set_ylabel('$\\V$ (\si{\milli\\volt})',rotation = 0 , 
                horizontalalignment='left',
                verticalalignment='top')
-ax1.set_xlabel('$\\t$ (\si{\milli\second}) ')
-ax3.set_xlabel('$\\t$ (\si{\milli\second}) ')
+ax1.set_xlabel('$t$ (\si{\milli\second}) ')
+ax3.set_xlabel('$t$ (\si{\milli\second}) ')
 
 
 
-ax0b.set_xlabel('$\Delta \\t$ (\si{\milli\second}) ')
-ax4.set_xlabel('$\Delta \\t$ (\si{\milli\second}) ')
-ax5.set_xlabel('$\Delta \\t$ (\si{\milli\second}) ')
+ax0b.set_xlabel('$\Delta t$ (\si{\milli\second}) ')
+ax4.set_xlabel('$\Delta t$ (\si{\milli\second}) ')
+ax5.set_xlabel('$\Delta t$ (\si{\milli\second}) ')
 ax2.set_ylabel('$S_\\V$ in spine',rotation = 0 , 
                horizontalalignment='left',
                verticalalignment='top')
@@ -2202,7 +2202,7 @@ ax3.annotate("", xy=(2+1,20-2), xytext=(2+11,20-2),
 ax3.vlines(2+1,9.76,19,linestyle='--')
 ax3.vlines(2+11,2.44,19,linestyle='--')
 
-ax3.annotate('$\\tau$',xy = (27-20,21-2))
+ax3.annotate('$tau$',xy = (27-20,21-2))
 
 ax1.annotate('DiS: $V_{\\rm spine}$',xy = (40,35))
 
@@ -2473,7 +2473,7 @@ ax4.spines['bottom'].set_position(('data',0.00))
 ax4.spines['top'].set_color('none')
 #ax4.xaxis.set_visible(False)
 #ax4.xaxis.tick_top()
-ax4.set_ylabel('$S_{[{\\textrm Ca}^{2+}]}$',rotation = 0 , 
+ax4.set_ylabel('$S_{[{ Ca}^{2+}]}$',rotation = 0 , 
                horizontalalignment='left',
                verticalalignment='top')
 
@@ -2492,7 +2492,7 @@ ax0b.yaxis.set_major_locator(FixedLocator(arange(4,12,2)))
 #ax0b.spines['right'].set_position(('data',0.65))
 #ax0b.spines['top'].set_color('none')
 #ax0b.xaxis.set_visible(False)
-ax0b.set_ylabel('$\\tau/\\tau_\infty$',rotation = 0 , 
+ax0b.set_ylabel('$tau/tau_\infty$',rotation = 0 , 
                horizontalalignment='left',
                verticalalignment='top')
 
@@ -2520,14 +2520,14 @@ ax1.set_ylabel('$\\V$ (\si{\milli\\volt})',rotation = 0 ,
 ax3.set_ylabel('$\\V$ (\si{\milli\\volt})',rotation = 0 , 
                horizontalalignment='left',
                verticalalignment='top')
-ax1.set_xlabel('$\\t$ (\si{\milli\second}) ')
-ax3.set_xlabel('$\\t$ (\si{\milli\second}) ')
+ax1.set_xlabel('$t$ (\si{\milli\second}) ')
+ax3.set_xlabel('$t$ (\si{\milli\second}) ')
 
 
 
-ax0b.set_xlabel('$\Delta \\t$ (\si{\milli\second}) ')
-ax4.set_xlabel('$\Delta \\t$ (\si{\milli\second}) ')
-ax5.set_xlabel('$\Delta \\t$ (\si{\milli\second}) ')
+ax0b.set_xlabel('$\Delta t$ (\si{\milli\second}) ')
+ax4.set_xlabel('$\Delta t$ (\si{\milli\second}) ')
+ax5.set_xlabel('$\Delta t$ (\si{\milli\second}) ')
 ax2.set_ylabel('$S_\\V$ in spine',rotation = 0 , 
                horizontalalignment='left',
                verticalalignment='top')
@@ -2597,7 +2597,7 @@ ax3.annotate("", xy=(2+1,20-2), xytext=(2+11,20-2),
 ax3.vlines(2+1,9.76,19,linestyle='--')
 ax3.vlines(2+11,2.44,19,linestyle='--')
 
-ax3.annotate('$\\tau$',xy = (27-20,21-2))
+ax3.annotate('$tau$',xy = (27-20,21-2))
 
 ax1.annotate('DiS: $V_{\\rm spine}$',xy = (40,35))
 
