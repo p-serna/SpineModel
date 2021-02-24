@@ -92,7 +92,7 @@ def getintp(x,p = .95):
     sh = xc.shape[0]
     xmed = xc[sh//2]
     s0= int(sh*(1-p)/2)
-    s1 = sh-s0
+    s1 = sh-s0-1
     x0 = xc[s0]
     x1 = xc[s1]
     return((xmed,x0,x1))
