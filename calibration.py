@@ -8,6 +8,7 @@ import tools as tools
 from bootstrap_shcr import *
 from data_Fullset import SCxL23 as exppar
 from tools import *
+import tools 
 
 gtrG = exppar.gtrG
 gtrA = exppar.gtrA
@@ -38,6 +39,22 @@ model.soma.L = 20
 
 print("Neuron Topology:")
 print(lb.h.topology())
+
+nsp = 500
+dis = btset_cd(cd='DiS',size=nsp)
+sis = btset_cd(cd='SiS',size=nsp)
+sps = btset_cd(cd='Sp',size=nsp)
+
+dis['Rneck'] = dis['Rneck']#*2
+sis['Rneck'] = sis['Rneck']#*2
+sps['Rneck'] = sps['Rneck']#*2
+
+iPSDsh = btShInh(size=nsp)
+
+
+sp = model.spne[0]
+sp.L = dis["L"].mean()
+sp.diam = dis["D"].mean()
 
 
 model.AMPAlist = []
@@ -293,10 +310,10 @@ def simulateSet(model,spn,tG = 500,ton = 50,
         spineArea =  sp(0.5).area()#sp.L*sp.diam+1.8*sp.diam**2/4 # um^2
         
         CaTcond = 1e-4# to take pS/um^2 to S/cm^2
-        sp.pbar_caL13PS = VDCC[0]*CaTcond#/spineArea
-        sp.pbar_caLPS = VDCC[1]*CaTcond#/spineArea
-        sp.pbar_canPS = VDCC[2]*CaTcond#/spineArea
-        sp.pcaqbar_caqPS = VDCC[3]*CaTcond#/spineArea
+        sp.pbar_caL13_alt = VDCC[0]*CaTcond#/spineArea
+        sp.pbar_caL_alt = VDCC[1]*CaTcond#/spineArea
+        sp.pbar_can_alt = VDCC[2]*CaTcond#/spineArea
+        sp.pcaqbar_caq_alt = VDCC[3]*CaTcond#/spineArea
         
         
         NC.delay = toffset+ton-50
@@ -439,12 +456,12 @@ gtrN = exppar.gtrN
 #plot(spdata['A1'],-mes[:,-3]*1000,'.')
 sel = spdata['nPSD']==2.0
 #plot(spdata['A1'][sel],-mes[sel,-3]*1000,'.')
-i = getintp(-mes[:,-3]*1000,0.68)
+i = tools.getintp(-mes[:,-3]*1000,0.68)
 print('Spines <uEPSC> = %.2f, (med,cf int 0.68) = (%.2f,%.2f,%.2f)' % (-mes[:,-3].mean()*1e3,i[0],i[1],i[2]))
-i = getintp(-mes[sel,-3]*1000,0.68)
+i = tools.getintp(-mes[sel,-3]*1000,0.68)
 print('DiS <uEPSC> = %.2f, (med,cf int 0.68) = (%.2f,%.2f,%.2f)' % (-mes[sel,-3].mean()*1e3,i[0],i[1],i[2]))
 
-i = getintp(mes[:,3],0.68)
+i = tools.getintp(mes[:,3],0.68)
 print('<uEPSP> = %.2f, (med,cf int 0.68) = (%.2f,%.2f,%.2f)' % (mes[:,3].mean(),i[0],i[1],i[2]))
 print('CV and conductance', mes[:,3].std()/mes[:,3].mean(), spdata['A1'].mean()*gtrA*1e3)
 
@@ -469,7 +486,7 @@ def obtain_uEPSC(gtrAvalue):
     #i = getintp(-mes[sel,-3]*1000,0.68)
     #print('DiS <uEPSC> = %.2f, (med,cf int 0.68) = (%.2f,%.2f,%.2f)' % (-mes[sel,-3].mean()*1e3,i[0],i[1],i[2]))
 
-    i = getintp(mes[:,3],0.68)
+    i = tools.getintp(mes[:,3],0.68)
     #print('<uEPSP> = %.2f, (med,cf int 0.68) = (%.2f,%.2f,%.2f)' % (mes[:,3].mean(),i[0],i[1],i[2]))
     #print('CV and conductance', mes[:,3].std()/mes[:,3].mean(), spdata['A1'].mean()*gtrA*1e3)
 
@@ -480,4 +497,4 @@ def obtain_uEPSC(gtrAvalue):
     return avuEPSCs
     
 target = 58.0/2.8 #58pA div by 2.8 contacts
-print("Minimizacion:", obtain_uEPSC(expar.gtrA), target)
+print("Minimizacion:", obtain_uEPSC(exppar.gtrA), target)
