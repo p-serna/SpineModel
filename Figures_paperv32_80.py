@@ -580,7 +580,7 @@ for ifigure in range(4):
     pos[1:,0] = -0.08
     pos[-1,:] = (-.052,1.1)
     numbering_panels(axs,pos,labels=['A1','B','C','D','E','F','G','A2'])
-    fig.savefig(folderoutput+'f1v31splitting_b.png',dpi = 300)
+    #fig.savefig(folderoutput+'f1v31splitting_b.png',dpi = 300)
     #fig.savefig(folderoutput+'f1v31splitting_b.pdf',dpi = 300)
 
     #avefig("Figure_Model_1bx2.pdf",dpi = 300, tight_layout = True)
@@ -888,7 +888,7 @@ for ifigure in range(4):
     pos[1:,0] = -0.08
     pos[-1,:] = (-.052,1.1)
     numbering_panels(axs,pos,labels=['A1','B','C','D','E','F','G','A2'])
-    fig.savefig(folderoutput+'f1_SA'+str(ifigure)+'.png',dpi = 300)
+    #fig.savefig(folderoutput+'f1_SA'+str(ifigure)+'.png',dpi = 300)
 #fig.savefig(folderoutput+'f1v31splitting_b.pdf',dpi = 300)
 
 #avefig("Figure_Model_1bx2.pdf",dpi = 300, tight_layout = True)
@@ -1362,7 +1362,7 @@ ax5.set_ylabel('$S_\\V$ in dend',rotation = 0 ,
 
 ax4.yaxis.set_label_coords(0.015,1.0)
 ax0b.yaxis.set_label_coords(0.035,1.03)
-ax2.yaxis.set_label_coords(0.035,1.)
+ax2.yaxis.set_label_coords(0.035,1.1)
 ax5.yaxis.set_label_coords(0.035,1.1)
 ax1.yaxis.set_label_coords(0.035,1.2)
 ax3.yaxis.set_label_coords(0.035,1.2)
@@ -1921,7 +1921,7 @@ pos[-1,1] = 1.3
 numbering_panels(axs,pos,labels=['A1','B1','C','D','E','F','A2','B2'])
 
 
-fig.savefig(folderoutput+'f2v3_b2.png',dpi = 300)
+#fig.savefig(folderoutput+'f2v3_b2.png',dpi = 300)
 #fig.savefig(folderoutput+'f2v3_b2.pdf',dpi = 300)
 
 print('Finished 2nd figure 2nd version!')
@@ -2315,7 +2315,7 @@ pos[-1,1] = 1.3
 numbering_panels(axs,pos,labels=['A1','B1','C','D','E','F','A2','B2'])
 
 
-fig.savefig(folderoutput+'f2v3_b3_disvssps.png',dpi = 300)
+#fig.savefig(folderoutput+'f2v3_b3_disvssps.png',dpi = 300)
 #fig.savefig(folderoutput+'f2v3_b2.pdf',dpi = 300)
 
 print('Finished 2nd figure 3rd version!')
@@ -2710,7 +2710,7 @@ pos[-1,1] = 1.3
 numbering_panels(axs,pos,labels=['A1','B1','C','D','E','F','A2','B2'])
 
 
-fig.savefig(folderoutput+'f2v3_b_disvssps.png',dpi = 300)
+#fig.savefig(folderoutput+'f2v3_b_disvssps.png',dpi = 300)
 #fig.savefig(folderoutput+'f2v3_b2.pdf',dpi = 300)
 
 print('Finished 2nd figure 3rd version!')
@@ -2847,7 +2847,7 @@ ax1.tick_params(which='major',direction='in')
 
 
 #fig.savefig(folderoutput+'f3v3_A.pdf',dpi = 300)
-fig.savefig(folderoutput+'f3v3_A.png',dpi = 300)
+#fig.savefig(folderoutput+'f3v3_A.png',dpi = 300)
 
 print('Finished 3rd figure 1st part!')
 
@@ -2984,7 +2984,7 @@ ax1.tick_params(which='major',direction='in')
 
 
 #fig.savefig(folderoutput+'f3v3_A.pdf',dpi = 300)
-fig.savefig(folderoutput+'f3v3_A_DISDIS.png',dpi = 300)
+#fig.savefig(folderoutput+'f3v3_A_DISDIS.png',dpi = 300)
 
 print('Finished 3rd figure 1st part!')
 
@@ -3109,7 +3109,7 @@ ax1.tick_params(which='major',direction='in')
 
 
 #fig.savefig(folderoutput+'f3v3_A.pdf',dpi = 300)
-fig.savefig(folderoutput+'f3v3_A_DISDIS2.png',dpi = 300)
+#fig.savefig(folderoutput+'f3v3_A_DISDIS2.png',dpi = 300)
 
        
 with open(folderstoresp+"gatinginfo_lengthv31"+condition+shflag+".pickle","rb") as f:
@@ -3233,7 +3233,7 @@ ax1.vlines(0.0,0.,0.4,linestyle='--')
 
 
 #savefig(folderoutput+'f3v3_B.pdf',dpi = 300)
-savefig(folderoutput+'f3v3_B.png',dpi = 300)
+#savefig(folderoutput+'f3v3_B.png',dpi = 300)
 
 print('Finished 3rd figure 2nd part!')
 
@@ -3354,6 +3354,6 @@ ax1.vlines(0.0,0.,2.0,linestyle='--')
 
 
 #savefig(folderoutput+'f3v3_B.pdf',dpi = 300)
-savefig(folderoutput+'f3v3_B2.png',dpi = 300)
+#savefig(folderoutput+'f3v3_B2.png',dpi = 300)
 
 print('Finished 3rd figure 2nd part!')

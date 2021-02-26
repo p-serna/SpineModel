@@ -288,15 +288,12 @@ with open(folderstore+"All_baseline_datasetv3_"+condition+shflag+".pickle","rb")
 
 with open(folderstore+"All_baseline_depinhv3_"+condition+shflag+".pickle","rb") as f:
     messh,iPSDsh,posish,mesDiSI,spdataI = pickle.load(f)
-   
-
+    
 with open(folderstore+"All_baseline_datasetv3_"+condition+"_btstrp"+shflag+".pickle","rb") as f:
     vavgT_b,mesT_b,vtracsT_b,vtracsDT_b,vtracsST_b,CtracsT_b,me2T_b,_,dataT_b = pickle.load(f)
 
 with open(folderstore+"All_baseline_depinhv3_"+condition+"_btstrp"+shflag+".pickle","rb") as f:
     messh_b,iPSDsh_b,posish_b,mesDiSI_b,spdataI_b = pickle.load(f)
-   
-
 
 # In[12]:
 
@@ -315,7 +312,8 @@ spinemodel_sketch = './Neuron_persp9.png'
 im = Image.open(spinemodel_sketch)
 height = im.size[1]
 
-for ifigure in range(4):
+#for ifigure in range(4):
+for ifigure in [3]:
     im = np.array(im).astype(float) / 255
     fig = figure(figsize=(15,11.5*1.20))
     gs = mpl.gridspec.GridSpec(3, 4,  wspace=0.35, hspace=.35) # 2x3 grid
@@ -578,7 +576,7 @@ for ifigure in range(4):
     pos[1:,0] = -0.08
     pos[-1,:] = (-.052,1.1)
     numbering_panels(axs,pos,labels=['A1','B','C','D','E','F','G','A2'])
-    fig.savefig(folderoutput+'f1v31splitting_b.png',dpi = 300)
+    #fig.savefig(folderoutput+'f1v31splitting_b.png',dpi = 300)
     #fig.savefig(folderoutput+'f1v31splitting_b.pdf',dpi = 300)
 
     #avefig("Figure_Model_1bx2.pdf",dpi = 300)
@@ -735,20 +733,20 @@ for ifigure in range(4):
     # ax2.set_ylabel("$\\frac{\\V_{\Large max, shaft}}{\\V_{\Large max, spine}}$",rotation=0, 
     #                horizontalalignment='left',
     #                verticalalignment='top')
-    #ax2.set_ylabel("$\\frac{\\V_{\Large max, shaft}}{\\V_{\Large max, spine}}$",rotation=0, 
-    #               horizontalalignment='left',
-    #               verticalalignment='top')
+    ax2.set_ylabel("$\\frac{\\V_{\Large max, shaft}}{\\V_{\Large max, spine}}$",rotation=0, 
+                   horizontalalignment='left',
+                   verticalalignment='top')
 
     ax4.set_xlabel("$\\A_{\Large ePSD}$ (\si{\square\micro\meter})")
-    #ax4.set_ylabel("$[{Ca}^{2+}]_{\Large max}\, $(\si{\micro\Molar})",rotation=0, 
-    #               horizontalalignment='left',
-    #               verticalalignment='top')
+    ax4.set_ylabel("$[{Ca}^{2+}]_{\Large max}\, $(\si{\micro\Molar})",rotation=0, 
+                   horizontalalignment='left',
+                   verticalalignment='top')
     #ax3.set_xlabel("- $I_{s,max}$(pA)")
     ax3.set_xlabel("$\\A_{\Large ePSD}$ (\si{\square\micro\meter})")
 
-    #ax3.set_ylabel("$\Delta\\V_{\Large max}\,$ (\si{\milli\\volt})",rotation=0, 
-    #               horizontalalignment='left',
-    #               verticalalignment='top')
+    ax3.set_ylabel("$\Delta\\V_{\Large max}\,$ (\si{\milli\\volt})",rotation=0, 
+                   horizontalalignment='left',
+                   verticalalignment='top')
     ax3.tick_params(direction="in")
     ax4.tick_params(which='both',direction="in")
     ax2.tick_params(direction="in")
@@ -817,9 +815,9 @@ for ifigure in range(4):
     axt.set_xlim(23-25,45-25)
     axt.set_ylim(-70.5,ytopl)
     axt.set_xlabel('t (\si{\milli\second})')
-    #axt.set_ylabel('V (\si{\milli\\volt})',rotation = 0 , 
-    #               horizontalalignment='left',
-    #               verticalalignment='top')
+    axt.set_ylabel('V (\si{\milli\\volt})',rotation = 0 , 
+                   horizontalalignment='left',
+                   verticalalignment='top')
     axt.xaxis.set_minor_locator(FixedLocator([5,15]))
     axt.xaxis.set_major_locator(FixedLocator([0,10,20]))
     axt.yaxis.set_minor_locator(FixedLocator([-65,-55]))
@@ -837,9 +835,9 @@ for ifigure in range(4):
     axt.set_xlim(23-25,45-25)
     axt.set_ylim(-70.5,ytopl)
     axt.set_xlabel('t (\si{\milli\second})')
-    #axt.set_ylabel('V (\si{\milli\\volt})',rotation = 0 , 
-    #               horizontalalignment='left',
-    #               verticalalignment='top')
+    axt.set_ylabel('V (\si{\milli\\volt})',rotation = 0 , 
+                   horizontalalignment='left',
+                   verticalalignment='top')
     axt.xaxis.set_minor_locator(FixedLocator([5,15]))
     axt.xaxis.set_major_locator(FixedLocator([0,10,20]))
     axt.yaxis.set_minor_locator(FixedLocator([-65,-55]))
@@ -857,9 +855,9 @@ for ifigure in range(4):
     axt.set_xlim(23-25,45-25)
     axt.set_ylim(-70.5,ytopl)
     axt.set_xlabel('t (\si{\milli\second})')
-    #axt.set_ylabel('V (\si{\milli\\volt})',rotation = 0 , 
-    #               horizontalalignment='left',
-    #               verticalalignment='top')
+    axt.set_ylabel('V (\si{\milli\\volt})',rotation = 0 , 
+                   horizontalalignment='left',
+                   verticalalignment='top')
     axt.xaxis.set_minor_locator(FixedLocator([5,15]))
     axt.xaxis.set_major_locator(FixedLocator([0,10,20]))
     axt.yaxis.set_minor_locator(FixedLocator([-65,-55]))
@@ -887,6 +885,7 @@ for ifigure in range(4):
     pos[-1,:] = (-.052,1.1)
     numbering_panels(axs,pos,labels=['A1','B','C','D','E','F','G','A2'])
     fig.savefig(folderoutput+'f1_SA'+str(ifigure)+'.png',dpi = 300)
+
 #fig.savefig(folderoutput+'f1v31splitting_b.pdf',dpi = 300)
 
 #avefig("Figure_Model_1bx2.pdf",dpi = 300)
@@ -1527,7 +1526,7 @@ pos[-1,1] = 1.3
 numbering_panels(axs,pos,labels=['A1','B1','C','D','E','F','A2','B2'])
 
 
-fig.savefig(folderoutput+'f2v3_b.png',dpi = 300)
+#fig.savefig(folderoutput+'f2v3_b.png',dpi = 300)
 #fig.savefig(folderoutput+'f2v3_b.pdf',dpi = 300)
 
 print('Finished 2nd figure 1st version!')
@@ -2312,7 +2311,7 @@ pos[-1,1] = 1.3
 numbering_panels(axs,pos,labels=['A1','B1','C','D','E','F','A2','B2'])
 
 
-fig.savefig(folderoutput+'f2v3_b3_disvssps.png',dpi = 300)
+#fig.savefig(folderoutput+'f2v3_b3_disvssps.png',dpi = 300)
 #fig.savefig(folderoutput+'f2v3_b2.pdf',dpi = 300)
 
 print('Finished 2nd figure 3rd version!')
@@ -2707,7 +2706,7 @@ pos[-1,1] = 1.3
 numbering_panels(axs,pos,labels=['A1','B1','C','D','E','F','A2','B2'])
 
 
-fig.savefig(folderoutput+'f2v3_b_disvssps.png',dpi = 300)
+#fig.savefig(folderoutput+'f2v3_b_disvssps.png',dpi = 300)
 #fig.savefig(folderoutput+'f2v3_b2.pdf',dpi = 300)
 
 print('Finished 2nd figure 3rd version!')
@@ -2844,7 +2843,7 @@ ax1.tick_params(which='major',direction='in')
 
 
 #fig.savefig(folderoutput+'f3v3_A.pdf',dpi = 300,tight_layout = True)
-fig.savefig(folderoutput+'f3v3_A.png',dpi = 300)
+#fig.savefig(folderoutput+'f3v3_A.png',dpi = 300)
 
 print('Finished 3rd figure 1st part!')
 
@@ -2979,6 +2978,10 @@ ax1.set_xlim(0.,0.60)
 ax2.tick_params(which='major',direction='in')
 ax1.tick_params(which='major',direction='in')
 
+ax1.set_xlabel("inh$_V$ in the soma")
+ax2.set_xlabel("inh$_V$ in the spine")
+ax1.set_ylabel("Cumulative distribution")
+ax2.set_ylabel("Cumulative distribution")
 
 #fig.savefig(folderoutput+'f3v3_A.pdf',dpi = 300,tight_layout = True)
 fig.savefig(folderoutput+'f3v3_A_DISDIS.png',dpi = 300)
@@ -3033,7 +3036,6 @@ color = 'C2' # green
 color2= 'C0' # blue
 
 
-
 axss = [ax3,ax4]
 axsp = 0
 # ['Vspine','Vsoma','Vdendrite']
@@ -3052,8 +3054,8 @@ ax3.tick_params(which='major',direction='in')
 ax3.spines['top'].set_color('none')
 ax3.spines['right'].set_color('none')
 yloc_offonpath = 0.21 
-ax4.yaxis.set_label_coords(0.5,1.03)
-ax3.yaxis.set_label_coords(0.5,1.03)
+#ax4.yaxis.set_label_coords(0.5,1.03)
+#ax3.yaxis.set_label_coords(0.5,1.03)
 ax4.set_ylim(0,0.35)
 ax3.set_ylim(0,0.10)
 
@@ -3062,50 +3064,64 @@ ax3.tick_params(which='minor',direction='in')
 ax4.xaxis.set_minor_locator(FixedLocator(arange(-100,100,10)))
 ax4.tick_params(which='minor',direction='in')
 
-ax4.yaxis.set_label_coords(0.02,1.1)
-ax3.yaxis.set_label_coords(0.02,1.1)
+#ax4.yaxis.set_label_coords(0.02,1.1)
+#ax3.yaxis.set_label_coords(0.02,1.1)
 
 ax4.vlines(0.0,0.,1.0,linestyle='--')
 ax3.vlines(0.0,0.,0.4,linestyle='--')
+ax3.set_xlabel("$\Delta x$ ($\mu$m)")
+ax4.set_xlabel("$\Delta x$ ($\mu$m)")
 
-axss = [ax1,ax2]
-axsp = 0
-ax2.spines['top'].set_color('none')
-ax2.spines['right'].set_color('none')
+ax3.set_ylabel("inh$_V$ in the spine")
+ax4.set_ylabel("inh$_V$ in the soma")
+
+complet = False
+
+if complet:
+    axss = [ax1,ax2]
+    axsp = 0
+    ax2.spines['top'].set_color('none')
+    ax2.spines['right'].set_color('none')
 
 
-axsp = 1
-for i,lab in enumerate(['Vspine','Vsoma']):
-    axss[i].plot(shle[lab][:,0],shle[lab][:,1+axsp*5],'k.-',linewidth=3,markersize=8)
-    axss[i].plot(shle[lab][:,0],shle[lab][:,1+axsp*5],color+'.-',linewidth=2.5,label='Axo-spinous\n inhibition',markersize=8,alpha=0.9)
-    axss[i].fill_between(shle[lab][:,0],shle[lab][:,2+axsp*5],shle[lab][:,3+axsp*5],alpha=0.7,color=color)
-
-
-
-ax2.tick_params(which='major',direction='in')
-ax1.tick_params(which='major',direction='in')
-
-ax1.spines['top'].set_color('none')
-ax1.spines['right'].set_color('none')
-yloc_offonpath = 0.21 
-ax2.yaxis.set_label_coords(0.5,1.03)
-ax1.yaxis.set_label_coords(0.5,1.03)
-ax2.set_ylim(0,0.35)
-ax1.set_ylim(0,0.10)
-
-ax1.xaxis.set_minor_locator(FixedLocator(arange(-100,100,10)))
-ax1.tick_params(which='minor',direction='in')
-ax2.xaxis.set_minor_locator(FixedLocator(arange(-100,100,10)))
-ax2.tick_params(which='minor',direction='in')
-
-ax2.yaxis.set_label_coords(0.02,1.1)
-ax1.yaxis.set_label_coords(0.02,1.1)
-
-ax2.vlines(0.0,0.,1.0,linestyle='--')
-ax1.vlines(0.0,0.,0.4,linestyle='--')
+    axsp = 1
+    for i,lab in enumerate(['Vspine','Vsoma']):
+        axss[i].plot(shle[lab][:,0],shle[lab][:,1+axsp*5],'k.-',linewidth=3,markersize=8)
+        axss[i].plot(shle[lab][:,0],shle[lab][:,1+axsp*5],color+'.-',linewidth=2.5,label='Axo-spinous\n inhibition',markersize=8,alpha=0.9)
+        axss[i].fill_between(shle[lab][:,0],shle[lab][:,2+axsp*5],shle[lab][:,3+axsp*5],alpha=0.7,color=color)
 
 
 
+    ax2.tick_params(which='major',direction='in')
+    ax1.tick_params(which='major',direction='in')
+
+    ax1.spines['top'].set_color('none')
+    ax1.spines['right'].set_color('none')
+    yloc_offonpath = 0.21 
+    ax2.yaxis.set_label_coords(0.5,1.03)
+    ax1.yaxis.set_label_coords(0.5,1.03)
+    ax2.set_ylim(0,0.35)
+    ax1.set_ylim(0,0.10)
+
+    ax1.xaxis.set_minor_locator(FixedLocator(arange(-100,100,10)))
+    ax1.tick_params(which='minor',direction='in')
+    ax2.xaxis.set_minor_locator(FixedLocator(arange(-100,100,10)))
+    ax2.tick_params(which='minor',direction='in')
+
+    #ax2.yaxis.set_label_coords(0.02,1.1)
+    #ax1.yaxis.set_label_coords(0.02,1.1)
+
+    ax2.vlines(0.0,0.,1.0,linestyle='--')
+    ax1.vlines(0.0,0.,0.4,linestyle='--')
+
+
+    ax1.set_xlabel("$\Delta x$ ($\mu$m)")
+    ax2.set_xlabel("$\Delta x$ ($\mu$m)")
+    ax1.set_ylabel("inh$_V$ in the spine 1")
+    ax2.set_ylabel("inh$_V$ in the soma 2")
+else:
+    ax1.set_axis_off()
+    ax2.set_axis_off()
 
 #savefig(folderoutput+'f3v3_B.pdf',dpi = 300,tight_layout = True)
 savefig(folderoutput+'f3v3_B.png',dpi = 300)

@@ -1,0 +1,51 @@
+
+cond='1000_71_65'
+pars='1.0 -71.0 0.65'
+python Spine_Model_v32_main.py $pars $cond 1.0
+
+cond='1000_71_65'
+pars='1.0 -71.0 0.65'
+python Spine_Model_v32_main_btstrp.py $pars $cond 1.0
+
+cond='1000_72_65'
+pars='1.0 -72.0 0.65'
+python Spine_Model_v32_main.py $pars $cond 1.0
+
+cond='1000_72_65'
+pars='1.0 -72.0 0.65'
+python Spine_Model_v32_main_btstrp.py $pars $cond 1.0
+
+cond='1000_73_65'
+pars='1.0 -73.0 0.65'
+python Spine_Model_v32_main.py $pars $cond 1.0
+
+cond='1000_73_65'
+pars='1.0 -73.0 0.65'
+python Spine_Model_v32_main_btstrp.py $pars $cond 1.0
+
+cond='1000_74_65'
+pars='1.0 -74.0 0.65'
+python Spine_Model_v32_main.py $pars $cond 1.0
+
+cond='1000_74_65'
+pars='1.0 -74.0 0.65'
+python Spine_Model_v32_main_btstrp.py $pars $cond 1.0
+
+cond='1000_75_65'
+pars='1.0 -75.0 0.65'
+python Spine_Model_v32_main.py $pars $cond 1.0
+
+cond='1000_75_65'
+pars='1.0 -75.0 0.65'
+python Spine_Model_v32_main_btstrp.py $pars $cond 1.0
+
+cond='1000_76_65'
+pars='1.0 -76.0 0.65'
+python Spine_Model_v32_main.py $pars $cond 1.0
+
+cond='1000_76_65'
+pars='1.0 -76.0 0.65'
+python Spine_Model_v32_main_btstrp.py $pars $cond 1.0
+
+cond='1000_77_65'
+pars='1.0 -77.0 0.65'

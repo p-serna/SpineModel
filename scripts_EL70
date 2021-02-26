@@ -1,0 +1,21 @@
+
+cond='1000_70_65'
+pars='1.0 -70.0 0.65'
+python Spine_Model_v32_main_btstrp.py $pars $cond 1.0
+
+cond='1000_70_65'
+pars='1.0 -70.0 0.65'
+python Spine_Model_v32_main.py $pars $cond 1.0
+
+cond='1000_70_65'
+pars='1.0 -70.0 0.65'
+python Spine_Model_v32_gatin.py $pars $cond  1.0
+
+cond='1000_70_65'
+pars='1.0 -70.0 0.65'
+python Spine_Model_v32_spat.py $pars $cond  1.0
+python Spine_Model_v32_spaprefigs.py $cond  1.0
+
+cond='1000_70_65'
+python Figures_paperv32_70.py $cond  1.0
+
