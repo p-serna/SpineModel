@@ -11,6 +11,8 @@ bioRxiv 2020.08.06.230722; doi: https://doi.org/10.1101/2020.08.06.230722
 
 The python scripts provided here can be used to simulate a set of spines with different geometries, within a neuron environment.
 
+## Quick test
+To test it quickly you can open a docker container with the Dockerfile in folder docker and run scripts files: scripts_EL70 or finalscripts
 ## Requirements
 
 - Python 3
