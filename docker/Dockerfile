@@ -11,7 +11,7 @@ RUN apt-get -y --no-install-recommends install cm-super
 RUN pip install numpy matplotlib scipy cython ipython
 RUN pip install pandas==1.2.5
 RUN pip install jupyter
-RUN pip install neuron
+RUN pip install neuron=8.0
 RUN mkdir neuron
 RUN git -C neuron/ clone https://github.com/neuronsimulator/iv
 
