@@ -925,6 +925,10 @@ for ifigure in [3]:
 
 figsD["Fig6"] = pds.copy()
     
+for key, pds in figsD.items():
+    for key2, pdt in pds.items():
+        pdt.to_pickle(f"FiguresData/{key}{key2}_data.pkl")
+        pdt.to_csv(f"FiguresData/{key}{key2}_data.csv")
 #fig.savefig(folderoutput+'f1v31splitting_b.pdf',dpi = 300)
 
 #avefig("Figure_Model_1bx2.pdf",dpi = 300)
