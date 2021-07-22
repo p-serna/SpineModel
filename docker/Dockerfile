@@ -8,7 +8,7 @@ RUN apt-get -y --no-install-recommends install cm-super
 # mx=320;my=256;head -c "$((3*mx*my))" /dev/urandom | convert -depth 8 -size "${mx}x${my}" RGB:- Neuron_persp9.png
 # mx=320;my=256;head -c "$((3*mx*my))" /dev/urandom | convert -depth 8 -size "${mx}x${my}" RGB:- spine-inh_sketch_bothm.png
 
-RUN pip install numpy matplotlib scipy cython pandas ipython
+RUN pip install numpy matplotlib scipy cython ipython
 RUN pip install pandas==1.2.5
 RUN pip install jupyter
 RUN pip install neuron
