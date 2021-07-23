@@ -6,7 +6,7 @@ from matplotlib.pylab import *
 import matplotlib as mpl
 from matplotlib.transforms import Bbox
 
-
+import pandas as pd
 import PIL.Image as Image
 import pickle
 import os
@@ -39,6 +39,8 @@ if not os.path.exists(folderoutput):
     
 
 
+figsD = {}
+pds = {}
 
 rc('text',usetex=True)
 rc('text.latex',preamble='''\\usepackage{amssymb}\n\\usepackage{siunitx}\n\DeclareSIUnit\Molar{M}\n
@@ -1203,6 +1205,7 @@ ax3.set_xlim(15-20,50-20)
 #ax3.text(50,1,"$Ca^{2+}$")
 
 vm,sl,sv = 1-inhtimSis[:,0],1-inhtimSis_b[:,1],1-inhtimSis_b[:,2]
+xt1 = np.column_stack((tdels,vm,sl,sv))
 ax2.plot(tdels,vm,'C0.-',label='Dendritic\n inhibition')
 ax2.fill_between(tdels,sl,sv,alpha=0.5)
 
@@ -1210,14 +1213,33 @@ vm,sl,sv = 1-inhtimSis[:,3*5],1-inhtimSis_b[:,3*5+1],1-inhtimSis_b[:,3*5+2]
 ax4.plot(tdels,vm,'C0.-',label='Dendritic\n inhibition')
 ax4.fill_between(tdels,sl,sv,alpha=0.5,color='C0')
 #ax2.set_axis_off()
+xt2 = np.column_stack((tdels,vm,sl,sv))
 
 vm,sl,sv = 1-inhtimDis[:,0],1-inhtimDis_b[:,1],1-inhtimDis_b[:,2]
 ax2.plot(tdels,vm,'C1.-',label='Spinous\n inhibition')
 ax2.fill_between(tdels,sl,sv,color='C1',alpha=0.5)
 
+xt1 = np.column_stack((xt1,vm,sl,sv))
+
+
 vm,sl,sv = 1-inhtimDis[:,3*5],1-inhtimDis_b[:,3*5+1],1-inhtimDis_b[:,3*5+2]
 ax4.plot(tdels,vm,'C1.-',label='Spinous\n inhibition')
 ax4.fill_between(tdels,sl,sv,color='C1',alpha=0.5)
+
+xt2 = np.column_stack((xt2,vm,sl,sv))
+
+pds["D"] = pd.DataFrame(xt1,columns=["dt(ms)", "inhV shaft inhibition - M", "inhV shaft inhibition - lb", "inhV shaft inhibition - ub","inhV spinous inhibition -M","inhV spinous inhibition - lb","inhV spinous inhibition - ub"])
+
+pds["E"] = pd.DataFrame(xt1,columns=["dt(ms)", "inhCa shaft inhibition - M", "inhCa shaft inhibition - lb", "inhCa shaft inhibition - ub","inhCa spinous inhibition -M","inhCa spinous inhibition - lb","inhCa spinous inhibition - ub"])
+
+#print(pds["E"].values[:,np.array([0,1,4])])
+
+figsD["Fig7"] = pds
+
+for key, pds in figsD.items():
+    for key2, pdt in pds.items():
+        pdt.to_pickle(f"FiguresData/{key}{key2}_data.pkl")
+        pdt.to_csv(f"FiguresData/{key}{key2}_data.csv")
 
 vm,sl,sv = 1-inhtimSis[:,1*5],1-inhtimSis_b[:,1*5+1],1-inhtimSis_b[:,1*5+2]
 ax5.plot(tdels,vm,'C0.-',label='Dendritic\n inhibition')

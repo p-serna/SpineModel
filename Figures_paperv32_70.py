@@ -7,6 +7,7 @@ import matplotlib as mpl
 from matplotlib.transforms import Bbox
 
 
+import pandas as pd
 import PIL.Image as Image
 import pickle
 import os
@@ -119,7 +120,7 @@ def numbering_panels(axs,pos = None,labels=alphabet):
 # In[9]:
 
 
-def plot_trace(data,t,ax=None,c='C0',band= None,label= None,linestyle='-'):
+def plot_trace(data,t,ax=None,c='C0',band= None,label= None,linestyle='-',full=False):
     if ax is None:
         ax = gca()
     vtracso = data*1.0
@@ -128,6 +129,7 @@ def plot_trace(data,t,ax=None,c='C0',band= None,label= None,linestyle='-'):
     nmed = sh//2
     nl1, nv1 = int(sh*0.16),int(sh*(1-0.16))
     nl2, nv2 = int(sh*0.025),int(sh*(1-0.025))
+    xt = np.column_stack((t,vtracso[:,nmed],vtracso[:,nl1],vtracso[:,nv1]))
 
     if label is None:
         ax.plot(t,vtracso[:,nmed],c=c,linestyle=linestyle)
@@ -143,6 +145,8 @@ def plot_trace(data,t,ax=None,c='C0',band= None,label= None,linestyle='-'):
     else:
         ax.fill_between(t,vtracso[:,nl1],vtracso[:,nv2],color=c,alpha=0.2)
         ax.fill_between(t,vtracso[:,nl1],vtracso[:,nv1],color=c,alpha=0.5)
+    if full:
+        return ax,xt
     return(ax)
 
 # Scale bars
@@ -248,6 +252,8 @@ def plot_syninputs(fig,ax):
     yglu = exp(-xs/toff)-exp(-xs/ton); yglu = yglu/max(yglu)
     ax.plot(concatenate(([-10],xs)),concatenate(([0],yglu)),'-',c=redcolor,linewidth= 2,alpha=0.5,label='NMDA')
     ax.set(autoscale_on=False)
+    xt = np.column_stack((concatenate(([-10],xs)),concatenate(([0],yglu))))
+
 
 
     ton, toff = (0.1,1.8)
@@ -255,12 +261,15 @@ def plot_syninputs(fig,ax):
     yglu = exp(-xs/toff)-exp(-xs/ton); yglu = yglu/max(yglu)
     ax.plot(concatenate(([-10],xs)),concatenate(([0],yglu))-1.015,'-',c=redcolor,linewidth= 2,label='AMPA')
 
+    xt = np.column_stack((xt,concatenate(([0],yglu))))
+    
     ton, toff = (0.5,15.0)
     trise = ton*toff/(ton-toff)*log(ton/toff)
     ygaba = exp(-xs/toff)-exp(-xs/ton); ygaba= ygaba/max(ygaba)
     ax.plot(concatenate(([-10],xs)),concatenate(([0],ygaba))-1.015*2,'g-',linewidth= 2,label='GABA')
     #gradient_bar(ax,[20],[1.25],3*toff,1.05,cmap = cm.Greens_r)
     ax.set_yticks(ticks=array([0,1.]))
+    xt = np.column_stack((xt,concatenate(([0],yglu))))
     #gradient_bar(ax,[0],[1.27+.2],3*toff,1.27,cmap = newcmp)
 
 
@@ -276,7 +285,7 @@ def plot_syninputs(fig,ax):
     ax.annotate('NMDA',xy = (40,0.16))
     ax.annotate('AMPA',xy = (40,-0.95))
     ax.annotate('GABA',xy = (40,-1.88))
-
+    return xt
 
 # In[11]:
 
@@ -312,6 +321,8 @@ spinemodel_sketch = './Neuron_persp9.png'
 im = Image.open(spinemodel_sketch)
 height = im.size[1]
 
+figsD = {}
+pds = {}
 #for ifigure in range(4):
 for ifigure in [3]:
     im = np.array(im).astype(float) / 255
@@ -327,8 +338,8 @@ for ifigure in [3]:
     axl1 = fig.add_subplot(gs[2, 2]) # 3nd row, second col
     axl2 = fig.add_subplot(gs[2, 3]) # 3nd row, 3rd col
 
-    plot_syninputs(fig,axl0)
-
+    xt = plot_syninputs(fig,axl0)
+    pds["A2"] = pd.DataFrame(xt,columns=["t(ms)","Conductance NMDA","Conductance AMPA","Conductance GABA"])
     ax0.imshow(im)
     ax0.set_axis_off()
 
@@ -343,31 +354,33 @@ for ifigure in [3]:
     # Plot in fig Delta V - V_dend
     #s0 = dataT['A2']>0
     s1 = np.arange(mesT.shape[0])
-    ax2.plot(abs(mesT[s1,0]),(mesT[s1,2])/mesT[s1,1],'.',label="Spine head",alpha=0.5)
+    ax2.plot(abs(mesT[s1,0]),1-(mesT[s1,1])/mesT[s1,2],'.',label="Spine head",alpha=0.5)
     #ax2.plot(abs(mesT[s0,0]),(mesT[s0,2])/mesT[s0,1],'.',c=redcolor,label="Spine head",alpha=0.5)
 
+    #pds["D"
+    
     if shflag == '':    
         xtt = linspace(0,210)
-        ax2.plot(xtt,xtt*0+.5,'k:')
-        ax2.vlines(210,0,0.5,linestyle=':')
+        #ax2.plot(xtt,xtt*0+.5,'k:')
+        #ax2.vlines(210,0,0.5,linestyle=':')
         xtt = linspace(0,1000)
-        ax2.plot(xtt,xtt*0+.9,'k:')
+        #ax2.plot(xtt,xtt*0+.9,'k:')
 
         ax2.plot(150,((mesT[:,2])/mesT[:,1]).mean(),'rx',markersize = 8)
         xtt = linspace(0,150)
 
-        ax2.plot(xtt,xtt*0+((mesT[:,2])/mesT[:,1]).mean(),'k:')
+        #ax2.plot(xtt,xtt*0+((mesT[:,2])/mesT[:,1]).mean(),'k:')
     else:
         xtt = linspace(0,145)
-        ax2.plot(xtt,xtt*0+.5,'k:')
-        ax2.vlines(145,0,0.5,linestyle=':')
-        xtt = linspace(0,1000)
-        ax2.plot(xtt,xtt*0+.9,'k:')
+        #ax2.plot(xtt,xtt*0+.5,'k:')
+        #ax2.vlines(145,0,0.5,linestyle=':')
+        #xtt = linspace(0,1000)
+        #ax2.plot(xtt,xtt*0+.9,'k:')
 
         ax2.plot(145,((mesT[:,2])/mesT[:,1]).mean(),'rx',markersize = 8)
-        xtt = linspace(0,145)
+        #xtt = linspace(0,145)
 
-        ax2.plot(xtt,xtt*0+((mesT[:,2])/mesT[:,1]).mean(),'k:')
+        #ax2.plot(xtt,xtt*0+((mesT[:,2])/mesT[:,1]).mean(),'k:')
 
 
     # ax2.plot(200,0.5,'rx',markersize = 8)
@@ -382,6 +395,12 @@ for ifigure in [3]:
     # Plot in fig Calcium
     ax4.plot(abs(dataT['A1'][s1]),mesT[s1,4],'.',label="Spine head",alpha=0.5)
     ax4.plot(abs(dataT['A1'][s0]),mesT[s0,4],'.',c=redcolor,label="Spine head",alpha=0.5)
+    
+    xt0 = np.column_stack((abs(dataT['A1'][s1]),mesT[s1,4],mesT[s1,4]*0))
+    xt1 = np.column_stack((abs(dataT['A1'][s0]),mesT[s0,4],mesT[s0,4]*0+1))
+    xt = np.row_stack((xt0,xt1))
+    
+    pds["E"] = pd.DataFrame(xt,columns=["AePSD (um^2)","[Ca2+]_{max} (uM)","SiS (0) or DiS (1)"]) 
 
     calim = 4.0
     sel = mesT[:,4]> calim
@@ -411,6 +430,12 @@ for ifigure in [3]:
     ax3.plot(abs(dataT['A1']),mesT[:,3],'C2.',label="Soma",alpha=0.5)
     #ax3.plot(abs(mesT[s0,-3]/1e-3),mesT[s0,3],'r.',label="Spine head",alpha=0.5)
 
+    xt0 = np.column_stack((abs(dataT['A1'][s1]),mesT[s1,1],me2T[s1,3]-EL0,mesT[s1,3],mesT[s1,4]*0))
+    xt1 = np.column_stack((abs(dataT['A1'][s0]),mesT[s0,1],me2T[s0,3]-EL0,mesT[s0,3],mesT[s0,4]*0+1))
+    xt = np.row_stack((xt0,xt1))
+    
+    pds["C"] = pd.DataFrame(xt,columns=["AePSD (um^2)","dV_{max} (mV) - Spine Head","dV_{max} (mV) - Dendritic Shaft","dV_{max} (mV) - Soma","SiS (0) or DiS (1)"]) 
+    
     #mVav = mVsshI[:,2].mean()
     seldisi = spdataI['A2']>0
     s1v = dataT['nPSD']==1.0
@@ -498,8 +523,16 @@ for ifigure in [3]:
 
     axt = axl1
     ytopl = -55
+    
+    
+    #xt = np.column_stack((arange(vtracsT_b.shape[0])*modeldt-100+5-25,
+    #                     vtracsT_b[:,s1],
+    #                     vtracsDT_b[:,s1],
+    #                     vtracsST_b[:,s1]))
 
-    plot_trace(vtracsT_b[:,s1],arange(vtracsT_b.shape[0])*modeldt-100+5-25,axt,c='C0',band = bands)
+    #pds["B"] = pd.DataFrame(xt,columns=["t(ms)", "V(mV) Spine Head", "V(mV) Dendritic shaft", "V(mV) Soma"]) 
+    
+    _, xt1 = plot_trace(vtracsT_b[:,s1],arange(vtracsT_b.shape[0])*modeldt-100+5-25,axt,c='C0',band = bands,full=True)
     #plot_trace(vtracsDT[:,s1],arange(vtracsDT.shape[0])*modeldt-100+5-25,axt,c='C1',band = bands)
     #plot_trace(vtracsST[:,s1],arange(vtracsST.shape[0])*modeldt-100+5-25,axt,c='C2',band = bands)
     axt.tick_params(which='both',direction="in")
@@ -520,7 +553,7 @@ for ifigure in [3]:
     axt = axl2
 
     #plot_trace(vtracsT[:,s1],arange(vtracsT.shape[0])*modeldt-100+5-25,axt,c='C0',band = bands)
-    plot_trace(vtracsDT_b[:,s1],arange(vtracsDT_b.shape[0])*modeldt-100+5-25,axt,c='C1',band = bands)
+    _, xt2 = plot_trace(vtracsDT_b[:,s1],arange(vtracsDT_b.shape[0])*modeldt-100+5-25,axt,c='C1',band = bands,full=True)
     #plot_trace(vtracsST[:,s1],arange(vtracsST.shape[0])*modeldt-100+5-25,axt,c='C2',band = bands)
     axt.tick_params(which='both',direction="in")
     axt.yaxis.set_label_coords(0.02,.97)
@@ -541,7 +574,10 @@ for ifigure in [3]:
 
     #plot_trace(vtracsT[:,s1],arange(vtracsT.shape[0])*modeldt-100+5-25,axt,c='C0',band = bands)
     #plot_trace(vtracsDT[:,s1],arange(vtracsDT.shape[0])*modeldt-100+5-25,axt,c='C1',band = bands)
-    plot_trace(vtracsST_b[:,s1],arange(vtracsST_b.shape[0])*modeldt-100+5-25,axt,c='C2',band = bands)
+    _,xt3 = plot_trace(vtracsST_b[:,s1],arange(vtracsST_b.shape[0])*modeldt-100+5-25,axt,c='C2',band = bands,full=True)
+    
+    pds["B"] = pd.DataFrame(np.column_stack((xt1,xt2[:,1:],xt3[:,1:])),columns=["t(ms)", "V(mV) Spine Head - M", "V(mV) Spine Head - lb","V(mV) Spine Head - ub", "V(mV) Dendritic shaft - M", "V(mV) Dendritic shaft - lb", "V(mV) Dendritic shaft - ub", "V(mV) Soma - M", "V(mV) Soma - lb", "V(mV) Soma - ub"]) 
+    
     axt.tick_params(which='both',direction="in")
     axt.yaxis.set_label_coords(0.02,.97)
     axt.set_xlim(23-25,45-25)
@@ -610,8 +646,6 @@ for ifigure in [3]:
     s2 = dataT['nPSD']==2.0
 
 
-
-    import pandas as pd
     attenuation = pd.DataFrame((mesT[:,2])/mesT[:,1])
 
     if ifigure//2 == 1:
@@ -620,12 +654,15 @@ for ifigure in [3]:
     else:
         thres = 0.9
     # Plot in fig Delta V - V_dend
-    #s0 = dataT['A2']>0
-    s0 = dataT['SA']==1.0
-    s1 = ~s0
-    ax2.plot(abs(mesT[s1,0]),attenuation.values[s1],'k.',label="SA-",alpha=0.5)
-    ax2.plot(abs(mesT[s0,0]),attenuation.values[s0],'m.',c='m',label="SA+",alpha=0.5)
-
+    s0 = dataT['A2']>=0
+    s1 = dataT['A2']>=0
+    #s0 = dataT['SA']==1.0
+    #s1 = ~s0
+    ax2.plot(abs(mesT[s1,0]),attenuation.values[s1],'C0.',alpha=0.5)
+    #ax2.plot(abs(mesT[s0,0]),attenuation.values[s0],'m.',c='m',label="SA+",alpha=0.5)
+    
+    pds["D"] = pd.DataFrame(np.column_stack((abs(mesT[s1,0]),attenuation.values)),
+                            columns=["Rneck (MOhm)","1-Vsh/Vsp"])
     #ax2.plot(abs(mesT[s0,0]),(mesT[s0,2])/mesT[s0,1],'.',c=redcolor,label="Spine head",alpha=0.5)
 
     s1 = np.arange(mesT.shape[0])
@@ -733,7 +770,7 @@ for ifigure in [3]:
     # ax2.set_ylabel("$\\frac{\\V_{\Large max, shaft}}{\\V_{\Large max, spine}}$",rotation=0, 
     #                horizontalalignment='left',
     #                verticalalignment='top')
-    ax2.set_ylabel("$\\frac{\\V_{\Large max, shaft}}{\\V_{\Large max, spine}}$",rotation=0, 
+    ax2.set_ylabel("$1-\\frac{\\V_{\Large max, shaft}}{\\V_{\Large max, spine}}$",rotation=0, 
                    horizontalalignment='left',
                    verticalalignment='top')
 
@@ -886,6 +923,12 @@ for ifigure in [3]:
     numbering_panels(axs,pos,labels=['A1','B','C','D','E','F','G','A2'])
     fig.savefig(folderoutput+'f1_SA'+str(ifigure)+'.png',dpi = 300)
 
+figsD["Fig6"] = pds.copy()
+    
+for key, pds in figsD.items():
+    for key2, pdt in pds.items():
+        pdt.to_pickle(f"FiguresData/{key}{key2}_data.pkl")
+        pdt.to_csv(f"FiguresData/{key}{key2}_data.csv")
 #fig.savefig(folderoutput+'f1v31splitting_b.pdf',dpi = 300)
 
 #avefig("Figure_Model_1bx2.pdf",dpi = 300)
@@ -965,22 +1008,27 @@ newcmp = LinearSegmentedColormap('Magentas', segmentdata=cdict, N=256)
 plt.register_cmap(cmap=newcmp)
 
 def plot_syninputs(fig,ax):
+    
     xs = linspace(0,120,1000)
     ton, toff = (0.5,17.0)
     yglu = exp(-xs/toff)-exp(-xs/ton); yglu = yglu/max(yglu)
     ax.plot(concatenate(([-10],xs)),concatenate(([0],yglu)),'-',c=redcolor,linewidth= 2,alpha=0.5,label='NMDA')
     ax.set(autoscale_on=False)
-
+    xt = np.column_stack((concatenate(([-10],xs)),concatenate(([0],yglu))))
 
     ton, toff = (0.1,1.8)
     trise = ton*toff/(ton-toff)*log(ton/toff)
     yglu = exp(-xs/toff)-exp(-xs/ton); yglu = yglu/max(yglu)
     ax.plot(concatenate(([-10],xs)),concatenate(([0],yglu))-1,'-',c=redcolor,linewidth= 2,label='AMPA')
-
+    
+    xt = np.column_stack((xt,concatenate(([0],yglu))))
+    
     ton, toff = (0.5,15.0)
     trise = ton*toff/(ton-toff)*log(ton/toff)
     ygaba = exp(-xs/toff)-exp(-xs/ton); ygaba= ygaba/max(ygaba)
     ax.plot(concatenate(([-10],xs)),concatenate(([0],ygaba))-1-1,'g-',linewidth= 2,label='GABA')
+    xt = np.column_stack((xt,concatenate(([0],yglu))))
+    
     gradient_bar(ax,[20],[1.25],3*toff,1.05,cmap = cm.Greens_r)
     ax.set_yticks(ticks=array([0,1.]))
     gradient_bar(ax,[0],[1.27+.2],3*toff,1.27,cmap = newcmp)
@@ -996,7 +1044,7 @@ def plot_syninputs(fig,ax):
     ax.annotate('$\Delta t$',xy = (7,1.1))
     ax.annotate('',xy = (6,1.15),xytext = (0,1.15),arrowprops=dict(arrowstyle="<-"))
     ax.annotate('',xy = (14,1.15),xytext = (20,1.15),arrowprops=dict(arrowstyle="<-"))
-
+    return xt
 
 # In[17]:
 
